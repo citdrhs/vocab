@@ -66,12 +66,12 @@ p {
 }
 
 .lesson-button-wrapper.red {
-    background-color: #fce4e1;
+    background-color: #9cd6ff;
     border: 2px solid #3c78e7;
 }
 
 .lesson-button-wrapper.orange {
-    background-color: #ffdec2;
+    background-color: #9cd6ff;
     border: 2px solid #3c78e7;
 }
 
@@ -101,16 +101,16 @@ p {
 }
 
 .lesson-button-wrapper.blue:hover {
-    background-color: #5a99c3;
+    background-color: #9cd6ff;
     transform: translateY(-2px);
 }
 
 .lesson-button-wrapper.red:hover {
-    background-color: #bd5f56;
+    background-color: #9cd6ff;
     transform: translateY(-2px);
 }
 
 .lesson-button-wrapper.green:hover {
-    background-color: rgb(179, 214, 170);
+    background-color: #9cd6ff;
     transform: translateY(-2px);
 }
