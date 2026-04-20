@@ -48,7 +48,7 @@ p {
     transition: transform 0.2s, background-color 0.3s;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     color: #333;
