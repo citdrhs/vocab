@@ -81,11 +81,13 @@ p {
 }
 
 .lesson-button-wrapper.blue:hover {
-    background-color: #9cd6ff;
+    background-color: #cfcfcf;
+    border: 2px solid #606060;
     transform: translateY(-2px);
 }
 
 .lesson-button-wrapper.lightblue:hover {
-    background-color: #9cd6ff;
+    background-color: #cfcfcf;
+    border: 2px solid #606060;
     transform: translateY(-2px);
 }
