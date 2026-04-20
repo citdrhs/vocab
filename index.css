@@ -1,8 +1,10 @@
 body {
-    margin: 0;
+    text-align: center;
+    margin: 10px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f5f7fa;
     color: #333;
+    margin-bottom: 15px;
 }
 
 .container {
@@ -13,12 +15,14 @@ body {
 }
 
 h1 {
+    text-align: center;
     font-size: 2rem;
-    margin-bottom: 8px;
+    margin-bottom: 12px;
     color: #2c3e50;
 }
 
 p {
+    text-align: center;
     font-size: 1rem;
     margin-bottom: 20px;
 }
@@ -48,7 +52,7 @@ p {
     transition: transform 0.2s, background-color 0.3s;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     color: #333;
@@ -59,6 +63,7 @@ p {
     color: rgb(53, 53, 53);
     border: none;
     padding: 12px 24px;
+    margin-top: 15px;
     font-size: 1.1em;
     border-radius: 5px;
     cursor: pointer;
