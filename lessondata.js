@@ -170,7 +170,7 @@ var lesson_data = {
             "patern" : "father",
             "scop" : "to watch",
             "scrib" : "to write",
-            "script" : "to writee",
+            "script" : "to write",
             "cent" : "100",
         },
 
