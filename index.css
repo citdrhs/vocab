@@ -65,28 +65,8 @@ p {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.lesson-button-wrapper.red {
+.lesson-button-wrapper.lightblue {
     background-color: #9cd6ff;
-    border: 2px solid #3c78e7;
-}
-
-.lesson-button-wrapper.orange {
-    background-color: #9cd6ff;
-    border: 2px solid #3c78e7;
-}
-
-.lesson-button-wrapper.yellow {
-    background-color: #9fc1ff;
-    border: 2px solid #3c78e7;
-}
-
-.lesson-button-wrapper.green {
-    background-color: #9fc1ff;
-    border: 2px solid #3c78e7;
-}
-
-.lesson-button-wrapper.cyan {
-    background-color: #9fc1ff;
     border: 2px solid #3c78e7;
 }
 
@@ -95,22 +75,12 @@ p {
     border: 2px solid #3c78e7
 }
 
-.lesson-button-wrapper.purple {
-    background-color: #9cd6ff;
-    border: 2px solid #3c78e7;
-}
-
 .lesson-button-wrapper.blue:hover {
     background-color: #9cd6ff;
     transform: translateY(-2px);
 }
 
-.lesson-button-wrapper.red:hover {
-    background-color: #9cd6ff;
-    transform: translateY(-2px);
-}
-
-.lesson-button-wrapper.green:hover {
+.lesson-button-wrapper.lightblue:hover {
     background-color: #9cd6ff;
     transform: translateY(-2px);
 }
