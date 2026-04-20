@@ -32,9 +32,9 @@ p {
 }
 
 .lesson_container input {
-  height: 30px;
-  width: 30px;
-  background-color: #eee;
+    height: 30px;
+    width: 30px;
+    background-color: #eee;
 }
 
 .lesson-button-wrapper {
