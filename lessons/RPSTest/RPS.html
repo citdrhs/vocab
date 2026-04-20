@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../learndefword.css">
+    <title>Learn Antonyms</title>
+</head>
+<body onload="onload()">
+    <h1 id="title">Antonym quiz for lesson 00</h1>
+    <p id="question">word</p>
+
+    <div id="anwsers">
+        <button onclick="buttonClicked(0)">Antonym A</button>
+        <button onclick="buttonClicked(1)">Antonym B</button>
+        <button onclick="buttonClicked(2)">Antonym C</button>
+        <button onclick="buttonClicked(3)">Antonym D</button>
+    </div>
+
+    <p id="score">00/00</p>
+
+    <div id="done">
+        <p>Completed!</p>
+    </div>
+    
+    <div class="buttons">
+        <a href="../lessons.html"><button>return</button></a>
+        <button onclick="location.reload()">restart</button>
+    </div>
+
+    <script src="learnantonym.js"></script>
+    <script src="../../lessondata.js"></script>
+</body>
+</html>
