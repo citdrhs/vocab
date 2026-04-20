@@ -13,7 +13,7 @@ var active = false
 var got_wrong = false
 
 var buttons = document.querySelectorAll("#anwsers button")
-
+//hi
 function onload() { //runs when the page opens up
     current_lessons = JSON.parse(sessionStorage.getItem("current_lessons")) //get the current lessons
     if (current_lessons.length == 0) {window.location.href = "../../index.html";}
