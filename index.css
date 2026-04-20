@@ -55,7 +55,7 @@ p {
 }
 
 .allbutton {
-    background-color: #3f3f3f;
+    background-color: #ffffff;
     color: white;
     border: none;
     padding: 12px 24px;
@@ -66,13 +66,13 @@ p {
 }
 
 .lesson-button-wrapper.lightblue {
-    background-color: #9cd6ff;
-    border: 2px solid #3c78e7;
+    background-color: #ddf1ff;
+    border: 2px solid #4586ff;
 }
 
 .lesson-button-wrapper.blue {
     background-color: #9cd6ff;
-    border: 2px solid #3c78e7
+    border: 2px solid #003aa5
 }
 
 .lesson-button-wrapper.blue:hover {
