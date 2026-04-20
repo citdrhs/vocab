@@ -25,38 +25,38 @@ p {
 
 .lesson_container {
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(4, auto);
     column-gap: 15px;
     row-gap: 20px;
     justify-content: center;
 }
 
 .lesson_container input {
-  height: 30px;
-  width: 30px;
-  background-color: #eee;
+    height: 30px;
+    width: 30px;
+    background-color: #eee;
 }
 
 .lesson-button-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 110px;
-    height: 45px;
+    width: 165px;
+    height: 67.5px;
     border-radius: 12px;
     cursor: pointer;
     transition: transform 0.2s, background-color 0.3s;
     font-weight: bold;
     text-transform: uppercase;
-    font-size: 0.9rem;
+    font-size: 1.2rem;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     text-decoration: none;
     color: #333;
 }
 
 .allbutton {
-    background-color: #3f3f3f;
-    color: white;
+    background-color: #ffffff;
+    color: rgb(53, 53, 53);
     border: none;
     padding: 12px 24px;
     font-size: 1.1em;
@@ -65,52 +65,22 @@ p {
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-.lesson-button-wrapper.red {
-    background-color: #fce4e1;
-    border: 2px solid #e74c3c;
-}
-
-.lesson-button-wrapper.orange {
-    background-color: #ffdec2;
-    border: 2px solid #ff7500;
-}
-
-.lesson-button-wrapper.yellow {
-    background-color: rgb(252, 255, 211);
-    border: 2px solid rgb(205, 231, 60);
-}
-
-.lesson-button-wrapper.green {
-    background-color: #ecfce1;
-    border: 2px solid #419c3a;
-}
-
-.lesson-button-wrapper.cyan {
-    background-color: #bdf1ff;
-    border: 2px solid rgb(39, 222, 235);
+.lesson-button-wrapper.lightblue {
+    background-color: #ddf1ff;
+    border: 2px solid #4586ff;
 }
 
 .lesson-button-wrapper.blue {
     background-color: #9cd6ff;
-    border: 2px solid rgb(49, 17, 227)
-}
-
-.lesson-button-wrapper.purple {
-    background-color: #ffd0ff;
-    border: 2px solid rgb(231, 60, 220);
+    border: 2px solid #0059ff
 }
 
 .lesson-button-wrapper.blue:hover {
-    background-color: #5a99c3;
+    background-color: #9cd6ff;
     transform: translateY(-2px);
 }
 
-.lesson-button-wrapper.red:hover {
-    background-color: #bd5f56;
-    transform: translateY(-2px);
-}
-
-.lesson-button-wrapper.green:hover {
-    background-color: rgb(179, 214, 170);
+.lesson-button-wrapper.lightblue:hover {
+    background-color: #9cd6ff;
     transform: translateY(-2px);
 }
