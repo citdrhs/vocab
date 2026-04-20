@@ -56,7 +56,7 @@ p {
 
 .allbutton {
     background-color: #ffffff;
-    color: white;
+    color: rgb(53, 53, 53);
     border: none;
     padding: 12px 24px;
     font-size: 1.1em;
@@ -72,7 +72,7 @@ p {
 
 .lesson-button-wrapper.blue {
     background-color: #9cd6ff;
-    border: 2px solid #003aa5
+    border: 2px solid #0059ff
 }
 
 .lesson-button-wrapper.blue:hover {
