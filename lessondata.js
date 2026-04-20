@@ -1,6 +1,87 @@
 var lesson_data = { //all of the data for each of the lessons
     "1" : {
-        "words" : {}
+        "words" : { "Licentious":{
+            "ps" : "adjective",
+            "def" : "morally unrestrained",
+            "ex" : "Like St. Augustine, some people want to abandon thier styles, but not immediatly.",
+            "ant" :["Chaste", "Pure"], 
+            "syn" :["Immoral","Lewd"],
+
+        },
+
+        "   Numismatist":{
+            "ps" : "noun",
+            "def" : "a coin collector",
+            "ex" : "My father is a numismatist",
+            "ant" :["who whoem colection coins"], 
+            "syn" :["not a collecter of coins"],
+        },
+
+        "Paucity":{
+            "ps" : "noun",
+            "def" : "a scacity,lack",
+            "ex" : "The paucity of jobs in the small town forced jack to find work elsewhere",
+            "ant" :["abundance"], 
+            "syn" :["insufficiency"],
+        },
+
+        "fatalistic":{
+            "ps" : "adjective",
+            "def" : "believing that all events in life are inevitable and determined by fate",
+            "ex" : "Fatalistic thinkers believe that there is nothing they can do to change the course of their lives",
+            "ant" :["N/A"], 
+            "syn" :["N/A"],
+        },
+
+        "obtrude":{
+            "ps" : "verb",
+            "def" : "to force oneself into a situation uninvited.",
+            "ex" : "you were concentrating intently at the workon yur desk, so I did not wish to obtrude",
+            "ant" :["extricate"], 
+            "syn" :["impose","intrude"],
+        },
+
+        "pensive":{
+            "ps" : "adjective",
+            "def" : "dreamily thoughtful",
+            "ex" : "Jane was in a pensive mood after she finished reading the thought-provoking novel",
+            "ant" :["silly","frivolous"], 
+            "syn" :["reflective","meditative"],
+        },
+
+        "lackadasical":{
+            "ps" : "adjective",
+            "def" : "uninterested; listless",
+            "ex" : "The lackadaisical student sat in the detention hall and stared out the window",
+            "ant" :["enyhusiastic","inspired"], 
+            "syn" :["spiritless","apathetic","languid"],
+        },
+
+        "alienate":{
+            "ps" : "verb",
+            "def" : "to turn away feelings or affections",
+            "ex" : "Your sarcastic remarks might alienate your friends and family",
+            "ant" :["endear","unite"], 
+            "syn" :["extrange","set against"],
+        },
+
+        "elated":{
+            "ps" : "adjective",
+            "def" : "in high spirits; exulatantlu proud and joyful",
+            "ex" : "we were elated to learn that our team would move on to finals",
+            "ant" :["depressed"], 
+            "syn" :["overjoyed"],
+        },
+
+        "epigram":{
+            "ps" : "noun",
+            "def" : "a witty saying expressig a single thought or observation",
+            "ex" : "the author placed relevent epigrams at the begining of each chapter.",
+            "ant" :["N/A"], 
+            "syn" :["aphorism","bon mot", "quip"],
+        },
+
+        }
     },
     "2" : {
         "words" : {"deluge" : { //the word
