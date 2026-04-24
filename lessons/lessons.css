@@ -4,7 +4,7 @@
     flex-wrap: wrap;
     position: relative;
 }
-
+ 
 .link-box {
     background-color: #3f3f3f;
     color: white;
@@ -23,35 +23,35 @@
     margin: 20px;
     text-decoration: none;
 }
-
+ 
 .link-box a {
     text-decoration: none;
     color: white;
     font-weight: bold;
 }
-
+ 
 .link-box:hover {
     background-color: #555;
     transform: scale(1.05);
 }
-
+ 
 #title {
     text-align: center;
     margin-top: 50px;
-    margin-bottom: 0px;
+    margin-bottom: -70px;
 }
-
+ 
 body {
     font-family: Arial, sans-serif;
 }
-
+ 
 #word-container {
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
     margin-top: 20px;
 }
-
+ 
 .word-box {
     border: 1px solid #ddd;
     padding: 15px;
@@ -61,28 +61,28 @@ body {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease;
 }
-
+ 
 .word-box h3 {
     font-size: 18px;
     margin: 0 0 10px;
     color: #333;
 }
-
+ 
 .word-box p {
     margin: 5px 0;
     font-size: 14px;
     color: #555;
 }
-
+ 
 .word-box p:first-child {
     font-weight: bold;
 }
-
+ 
 .word-box:hover {
     transform: scale(1.05);
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
-
+ 
 button {
     background-color: #3f3f3f;
     color: white;
@@ -98,20 +98,64 @@ button {
     position: fixed;
     bottom: 5px;
 }
-
+ 
 button:hover {
     background-color: #45a049;
     transform: scale(1.05);
 }
-
+ 
 button:focus {
     outline: none;
 }
-
+ 
 .maincontainer {
     display: flex;
 }
-
+ 
 .container h2 {
     padding-left: 20px;
+}
+ 
+/* RPS Section */
+.rps-main-header {
+    margin-top: 40px;
+    margin-bottom: 5px;
+    font-size: 1.3em;
+    color: #2c3e50;
+}
+ 
+.rps-section-header {
+    width: 100%;
+    font-size: 1em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: #888;
+    margin-top: 20px;
+    margin-bottom: 5px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 4px;
+}
+ 
+#rps-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    align-items: flex-start;
+}
+ 
+.rps-box {
+    width: 180px;
+    background-color: #eef6ff;
+    border: 1px solid #b3d4f5;
+}
+ 
+.rps-box h3 {
+    color: #1a4f8a;
+    font-size: 16px;
+}
+ 
+.rps-box p {
+    color: #444;
 }

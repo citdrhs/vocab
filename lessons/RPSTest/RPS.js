@@ -1,109 +1,224 @@
-var current_lessons = []
-var current_lesson_word_data = {}
-
-var all_options = []
-var antonym_options = []
-var current_antonym = "" 
-var anwser_idx = -1
-
-var score = 0
-var num_of_ants = 0
-
-var active = false
-var got_wrong = false
-
-var buttons = document.querySelectorAll("#anwsers button")
-
-function onload() { //runs when the page opens up
-    current_lessons = JSON.parse(sessionStorage.getItem("current_lessons")) //get the current lessons
-    if (current_lessons.length == 0) {window.location.href = "../../index.html";}
-
-    var title = "Antonym quiz for lesson " //title placeholder
-    for (num in current_lessons) { //iterates through all of the lessons
-        if (title == "Antonym quiz for lesson ") { //if it's the first lesson just add the number by itself
-            title += current_lessons[num]
-        } else { //if not, add a comma before
-            title += ", " + current_lessons[num]
+var current_lessons = [];
+var current_lesson_rps_data = { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} };
+ 
+var allQuestions = []; // list of all question objects
+var currentQuestionIndex = 0;
+var correctAnswers = 0;
+ 
+function onload() {
+    current_lessons = JSON.parse(sessionStorage.getItem("current_lessons"));
+    if (current_lessons.length == 0) { window.location.href = "../../index.html"; }
+ 
+    // Build title
+    var title = "RPS Test for Lesson ";
+    for (var num in current_lessons) {
+        if (title == "RPS Test for Lesson ") {
+            title += current_lessons[num];
+        } else {
+            title += ", " + current_lessons[num];
         }
-        
-        Object.assign(current_lesson_word_data, lesson_data[current_lessons[num]].words) //add the words from the lesson onto the local word data bank
+ 
+        // Merge RPS data from each lesson
+        var rps = lesson_data[current_lessons[num]].rps;
+        Object.assign(current_lesson_rps_data.roots, rps.roots);
+        Object.assign(current_lesson_rps_data.prefixes, rps.prefixes);
+        Object.assign(current_lesson_rps_data.suffixes, rps.suffixes);
+        Object.assign(current_lesson_rps_data.words, rps.words);
+        Object.assign(current_lesson_rps_data.sentences, rps.sentences);
     }
-
-    document.getElementById("title").innerHTML = title //show the lesson names in the title
-
-    for (word in current_lesson_word_data) { //iterates through all the words
-        for (i in current_lesson_word_data[word].ant) { //iterate through all antonyms in the word
-            var data = { //make an object containing the antonym and the word
-                "ant" : current_lesson_word_data[word].ant[i],
-                "word" : word
-            }
-
-            antonym_options.push(data) //add it to the options to use and the full list of options (latter dosent get antonyms deleted from it while the former does)
-            all_options.push(data)
-        }
+ 
+    document.getElementById("title").innerHTML = title;
+ 
+    // Build all questions
+    allQuestions = buildQuestions();
+ 
+    if (allQuestions.length === 0) {
+        document.getElementById("prompt").textContent = "No RPS data available for this lesson.";
+        document.getElementById("answers").innerHTML = "";
+        document.getElementById("question-type").textContent = "";
+        document.getElementById("score").textContent = "";
+        return;
     }
-
-    num_of_ants = antonym_options.length //set the number of antonyms to how many options there are
-    document.getElementById("score").innerHTML = score + "/" + num_of_ants //display the starting score
-    document.getElementById("done").style.display = "none" //hide the completed text thingy
-
-    setQuestion() //sets the first question
+ 
+    // Shuffle questions
+    allQuestions = shuffle(allQuestions);
+ 
+    document.getElementById("score").textContent = `Question 1 of ${allQuestions.length}`;
+    showQuestion(0);
 }
-
-function setQuestion() { //this sets the data for the questions
-    current_antonym = antonym_options[Math.floor(Math.random() * antonym_options.length)] //the current antonym that's being questioned
-    document.getElementById("question").innerHTML = current_antonym.ant //the question is set to the antonym for the user to see
-
-    var correct_word = current_antonym.word //store the correct word for the current word
-    var other_words = [] //initiate an array for all the other words
-    
-    for (data in all_options) { //iterate through all the options
-        if (all_options[data].word != correct_word && !other_words.includes(all_options[data].word)) { //if its word is not the correct word and the word isnt already in the the other word options
-            other_words.push(all_options[data].word) //add it to the other word options
-        }
+ 
+function buildQuestions() {
+    var questions = [];
+ 
+    // All possible meanings for wrong answers (from roots + prefixes + suffixes)
+    var allMeanings = [];
+    for (var r in current_lesson_rps_data.roots) allMeanings.push(current_lesson_rps_data.roots[r]);
+    for (var p in current_lesson_rps_data.prefixes) allMeanings.push(current_lesson_rps_data.prefixes[p]);
+    for (var s in current_lesson_rps_data.suffixes) allMeanings.push(current_lesson_rps_data.suffixes[s]);
+ 
+    // TYPE 1: "What does [root/prefix/suffix] mean?" → answer is the meaning
+    var rpsEntries = [
+        ...Object.entries(current_lesson_rps_data.roots),
+        ...Object.entries(current_lesson_rps_data.prefixes),
+        ...Object.entries(current_lesson_rps_data.suffixes)
+    ];
+ 
+    for (var i = 0; i < rpsEntries.length; i++) {
+        var entry = rpsEntries[i];
+        var term = entry[0];
+        var meaning = entry[1];
+ 
+        var wrongChoices = allMeanings.filter(m => m !== meaning);
+        wrongChoices = shuffle(wrongChoices).slice(0, 3);
+ 
+        // If not enough wrong choices, skip
+        if (wrongChoices.length < 1) continue;
+ 
+        var choices = shuffle([meaning, ...wrongChoices]);
+ 
+        questions.push({
+            type: "meaning",
+            prompt: 'What does "' + term + '" mean?',
+            label: "Root / Prefix / Suffix",
+            correct: meaning,
+            choices: choices
+        });
     }
-
-    anwser_idx = Math.floor(Math.random() * 4) //select a random button to have the correct word
-
-    buttons.forEach((button, i) => { //iterate through all the buttons
-        document.getElementById("anwsers").children[i].style.background = "#000000" //resets the color for all the buttons
-        if (i == anwser_idx) { //if this button is the one selected to be the correct one
-            button.textContent = correct_word //set the text to the correct button
-        } else { //if not the correct button
-            var word = other_words[Math.floor(Math.random() * other_words.length)] //pick a word from the other word options
-            other_words.splice(other_words.indexOf(word), 1) //remove it so it cannot be used again
-            button.textContent = word //set the button's text to the selected word
-        }
-    })
-
-    active = true //allows you to click on buttons
-    got_wrong = false //reset the got wrong value
+ 
+    // TYPE 2: Sentence fill-in-the-blank (if any sentences exist)
+    // sentences format: { "sentence with ____" : "answer" }
+    for (var sentence in current_lesson_rps_data.sentences) {
+        var answer = current_lesson_rps_data.sentences[sentence];
+ 
+        // Build wrong choices from all rps terms
+        var allTerms = [
+            ...Object.keys(current_lesson_rps_data.roots),
+            ...Object.keys(current_lesson_rps_data.prefixes),
+            ...Object.keys(current_lesson_rps_data.suffixes)
+        ];
+        var wrongTerms = allTerms.filter(t => t !== answer);
+        wrongTerms = shuffle(wrongTerms).slice(0, 3);
+ 
+        if (wrongTerms.length < 1) continue;
+ 
+        var choices = shuffle([answer, ...wrongTerms]);
+ 
+        questions.push({
+            type: "sentence",
+            prompt: sentence,
+            label: "Fill in the blank",
+            correct: answer,
+            choices: choices
+        });
+    }
+ 
+    // TYPE 2b: Word fill-in-the-blank (if any words exist)
+    // words format: { "word" : "definition or sentence" }
+    for (var word in current_lesson_rps_data.words) {
+        var wordAnswer = current_lesson_rps_data.words[word];
+ 
+        var allTerms2 = [
+            ...Object.keys(current_lesson_rps_data.roots),
+            ...Object.keys(current_lesson_rps_data.prefixes),
+            ...Object.keys(current_lesson_rps_data.suffixes)
+        ];
+        var wrongTerms2 = allTerms2.filter(t => t !== wordAnswer);
+        wrongTerms2 = shuffle(wrongTerms2).slice(0, 3);
+ 
+        if (wrongTerms2.length < 1) continue;
+ 
+        var choices2 = shuffle([wordAnswer, ...wrongTerms2]);
+ 
+        questions.push({
+            type: "word",
+            prompt: word,
+            label: "Identify the root / prefix / suffix",
+            correct: wordAnswer,
+            choices: choices2
+        });
+    }
+ 
+    return questions;
 }
-
-function buttonClicked(idx) { //runs when a button is clicked, idx is the number of the button
-    if (active) { //if the user is allowed to click on buttons
-        if (idx == anwser_idx) { //if it's the correct word
-            document.getElementById("anwsers").children[idx].style.background = 'green' //make the button greeen
-            active = false //you cannot click on buttons anymore
-
-            if (!got_wrong) { //if the user got it right the first time
-                score += 1 //increase the score by 1
-                document.getElementById("score").innerHTML = score + "/" + num_of_ants //update the score
-                antonym_options.splice(antonym_options.indexOf(current_antonym), 1) //that antonym is removed from the options left to use
-            }
-            
-            if (antonym_options.length != 0) { //if there are still words left
-                setTimeout(setQuestion, 1000) //update the question after 1 second
-            } else { //if there are no more words left
-                setTimeout(() => { //run everything in this inline function after 1 second
-                    document.getElementById("done").style.display = "block" //show the finish text and restart button
-                    document.getElementById("question").style.display = "none" //hide the questions and anwsers
-                    document.getElementById("anwsers").style.display = "none"
-                }, 1000)
-            }
-        } else { //if it's the wrong word
-            document.getElementById("anwsers").children[idx].style.background = 'red' //make the button red
-            got_wrong = true //the user got a question wrong
-        }
+ 
+function showQuestion(index) {
+    if (index >= allQuestions.length) {
+        endQuiz();
+        return;
     }
+ 
+    var q = allQuestions[index];
+ 
+    document.getElementById("question-type").textContent = q.label;
+    document.getElementById("prompt").textContent = q.prompt;
+    document.getElementById("feedback").textContent = "";
+ 
+    var answersDiv = document.getElementById("answers");
+    answersDiv.innerHTML = "";
+ 
+    for (var i = 0; i < q.choices.length; i++) {
+        var btn = document.createElement("button");
+        btn.textContent = q.choices[i];
+        btn.setAttribute("data-choice", q.choices[i]);
+        btn.onclick = (function(choice) {
+            return function() { checkAnswer(choice); };
+        })(q.choices[i]);
+        answersDiv.appendChild(btn);
+    }
+ 
+    document.getElementById("score").textContent = `Question ${index + 1} of ${allQuestions.length}`;
+}
+ 
+function checkAnswer(selected) {
+    var q = allQuestions[currentQuestionIndex];
+ 
+    // Disable all buttons
+    var buttons = document.querySelectorAll("#answers button");
+    buttons.forEach(function(btn) {
+        btn.disabled = true;
+        if (btn.getAttribute("data-choice") === q.correct) {
+            btn.classList.add("correct");
+        } else if (btn.getAttribute("data-choice") === selected && selected !== q.correct) {
+            btn.classList.add("wrong");
+        }
+    });
+ 
+    var feedback = document.getElementById("feedback");
+    if (selected === q.correct) {
+        feedback.textContent = "Correct!";
+        feedback.style.color = "green";
+        correctAnswers++;
+    } else {
+        feedback.textContent = 'Incorrect! The answer was "' + q.correct + '".';
+        feedback.style.color = "red";
+    }
+ 
+    // Move to next question after a short delay
+    currentQuestionIndex++;
+    setTimeout(function() {
+        showQuestion(currentQuestionIndex);
+    }, 1200);
+}
+ 
+function endQuiz() {
+    document.getElementById("prompt").textContent = "";
+    document.getElementById("question-type").textContent = "";
+    document.getElementById("answers").innerHTML = "";
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("score").textContent = "";
+    document.getElementById("nav-buttons").style.display = "none";
+ 
+    var done = document.getElementById("done");
+    done.style.display = "block";
+    document.getElementById("done-text").textContent =
+        "Quiz complete! You got " + correctAnswers + " out of " + allQuestions.length + " correct.";
+}
+ 
+function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+    }
+    return a;
 }
