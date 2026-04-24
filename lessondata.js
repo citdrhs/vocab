@@ -167,7 +167,6 @@ var lesson_data = {
     "rps" : { //roots, prefixes, and suffixes
         "roots" : { //all the roots
             "patr" : "father",
-            "patern" : "father",
             "scop" : "to watch",
             "scrib" : "to write",
             "script" : "to write",
