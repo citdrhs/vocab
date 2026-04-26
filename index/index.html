@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Vocabulary Practice</title>
+</head>
+<body class="container" onload="index_onload()">
+    <div style="position:fixed; top:15px; right:15px; display:flex; gap:10px; align-items:center;">
+        <span id="welcome-text" style="font-size:0.9em; color:#555;"></span>
+        <button onclick="logout()" style="padding:6px 14px; font-size:0.85em; background:#3f3f3f; color:white; border:none; border-radius:5px; cursor:pointer;">Logout</button>
+    </div>
+ 
+    <h1>Vocabulary Tests</h1>
+    <p>Select your vocabulary lesson(s)</p>
+ 
+    <div class="lesson_container">
+        <div class="lesson-button-wrapper blue">
+            <input type="checkbox" onclick="index_addLesson('1')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('1')" class="lesson-button-wrapper blue">1</a>
+        </div>
+        <div class="lesson-button-wrapper lightblue">
+            <input type="checkbox" onclick="index_addLesson('2')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('2')" class="lesson-button-wrapper lightblue">2</a>
+        </div>
+        <div class="lesson-button-wrapper blue">
+            <input type="checkbox" onclick="index_addLesson('3')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('3')" class="lesson-button-wrapper blue">3</a>
+        </div>
+        <div class="lesson-button-wrapper lightblue">
+            <input type="checkbox" onclick="index_addLesson('4')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('4')" class="lesson-button-wrapper lightblue">4</a>
+        </div>
+        <div class="lesson-button-wrapper lightblue">
+            <input type="checkbox" onclick="index_addLesson('5')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('5')" class="lesson-button-wrapper lightblue">5</a>
+        </div>
+        <div class="lesson-button-wrapper blue">
+            <input type="checkbox" onclick="index_addLesson('6')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('6')" class="lesson-button-wrapper blue">6</a>
+        </div>
+        <div class="lesson-button-wrapper lightblue">
+            <input type="checkbox" onclick="index_addLesson('7')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('7')" class="lesson-button-wrapper lightblue">7</a>
+        </div>
+        <div class="lesson-button-wrapper blue">
+            <input type="checkbox" onclick="index_addLesson('8')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('8')" class="lesson-button-wrapper blue">8</a>
+        </div>
+        <div class="lesson-button-wrapper blue">
+            <input type="checkbox" onclick="index_addLesson('9')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('9')" class="lesson-button-wrapper blue">9</a>
+        </div>
+        <div class="lesson-button-wrapper lightblue">
+            <input type="checkbox" onclick="index_addLesson('10')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('10')" class="lesson-button-wrapper lightblue">10</a>
+        </div>
+        <div class="lesson-button-wrapper blue">
+            <input type="checkbox" onclick="index_addLesson('11')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('11')" class="lesson-button-wrapper blue">11</a>
+        </div>
+        <div class="lesson-button-wrapper lightblue">
+            <input type="checkbox" onclick="index_addLesson('12')">
+            <a href="../lessons/lessons.html" onclick="index_setLesson('12')" class="lesson-button-wrapper lightblue">12</a>
+        </div>
+    </div>
+    <dl></dl>
+    <a href="../lessons/lessons.html" id="gotoall"><button class="allbutton">Start selected lessons</button></a>
+ 
+    <script src="../lessons/lessons.js"></script>
+    <script src="../lessondata.js"></script>
+</body>
+</html>
+ 

@@ -1,140 +1,111 @@
 var current_lessons = [];
 var current_lesson_rps_data = { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} };
  
-var allQuestions = []; // list of all question objects
+var allQuestions = [];
 var currentQuestionIndex = 0;
 var correctAnswers = 0;
+var active = false;
+var got_wrong = false;
  
 function onload() {
     current_lessons = JSON.parse(sessionStorage.getItem("current_lessons"));
     if (current_lessons.length == 0) { window.location.href = "../../index.html"; }
  
-    // Build title
-    var title = "RPS Test for Lesson ";
-    for (var num in current_lessons) {
-        if (title == "RPS Test for Lesson ") {
-            title += current_lessons[num];
-        } else {
-            title += ", " + current_lessons[num];
+    askName(function() {
+        var title = "RPS Test for Lesson ";
+        for (var num in current_lessons) {
+            if (title == "RPS Test for Lesson ") {
+                title += current_lessons[num];
+            } else {
+                title += ", " + current_lessons[num];
+            }
+ 
+            var rps = lesson_data[current_lessons[num]].rps;
+            Object.assign(current_lesson_rps_data.roots, rps.roots);
+            Object.assign(current_lesson_rps_data.prefixes, rps.prefixes);
+            Object.assign(current_lesson_rps_data.suffixes, rps.suffixes);
+            Object.assign(current_lesson_rps_data.words, rps.words);
+            Object.assign(current_lesson_rps_data.sentences, rps.sentences);
         }
  
-        // Merge RPS data from each lesson
-        var rps = lesson_data[current_lessons[num]].rps;
-        Object.assign(current_lesson_rps_data.roots, rps.roots);
-        Object.assign(current_lesson_rps_data.prefixes, rps.prefixes);
-        Object.assign(current_lesson_rps_data.suffixes, rps.suffixes);
-        Object.assign(current_lesson_rps_data.words, rps.words);
-        Object.assign(current_lesson_rps_data.sentences, rps.sentences);
-    }
+        document.getElementById("title").innerHTML = title;
  
-    document.getElementById("title").innerHTML = title;
+        allQuestions = buildQuestions();
  
-    // Build all questions
-    allQuestions = buildQuestions();
+        if (allQuestions.length === 0) {
+            document.getElementById("prompt").textContent = "No RPS data available for this lesson.";
+            document.getElementById("answers").innerHTML = "";
+            document.getElementById("question-type").textContent = "";
+            document.getElementById("score").textContent = "";
+            return;
+        }
  
-    if (allQuestions.length === 0) {
-        document.getElementById("prompt").textContent = "No RPS data available for this lesson.";
-        document.getElementById("answers").innerHTML = "";
-        document.getElementById("question-type").textContent = "";
-        document.getElementById("score").textContent = "";
-        return;
-    }
- 
-    // Shuffle questions
-    allQuestions = shuffle(allQuestions);
- 
-    document.getElementById("score").textContent = `Question 1 of ${allQuestions.length}`;
-    showQuestion(0);
+        allQuestions = shuffle(allQuestions);
+        document.getElementById("score").textContent = `Question 1 of ${allQuestions.length}`;
+        showQuestion(0);
+    });
 }
  
 function buildQuestions() {
     var questions = [];
  
-    // All possible meanings for wrong answers (from roots + prefixes + suffixes)
-    var allMeanings = [];
-    for (var r in current_lesson_rps_data.roots) allMeanings.push(current_lesson_rps_data.roots[r]);
-    for (var p in current_lesson_rps_data.prefixes) allMeanings.push(current_lesson_rps_data.prefixes[p]);
-    for (var s in current_lesson_rps_data.suffixes) allMeanings.push(current_lesson_rps_data.suffixes[s]);
- 
-    // TYPE 1: "What does [root/prefix/suffix] mean?" → answer is the meaning
     var rpsEntries = [
         ...Object.entries(current_lesson_rps_data.roots),
         ...Object.entries(current_lesson_rps_data.prefixes),
         ...Object.entries(current_lesson_rps_data.suffixes)
     ];
  
+    // TYPE 1: What does [term] mean?
     for (var i = 0; i < rpsEntries.length; i++) {
-        var entry = rpsEntries[i];
-        var term = entry[0];
-        var meaning = entry[1];
+        var term = rpsEntries[i][0];
+        var meaning = rpsEntries[i][1];
  
-        var wrongChoices = allMeanings.filter(m => m !== meaning);
+        var wrongChoices = rpsEntries
+            .filter(e => e[0] !== term)
+            .map(e => e[1]);
+        wrongChoices = [...new Set(wrongChoices)];
         wrongChoices = shuffle(wrongChoices).slice(0, 3);
  
-        // If not enough wrong choices, skip
         if (wrongChoices.length < 1) continue;
- 
-        var choices = shuffle([meaning, ...wrongChoices]);
  
         questions.push({
             type: "meaning",
             prompt: 'What does "' + term + '" mean?',
             label: "Root / Prefix / Suffix",
             correct: meaning,
-            choices: choices
+            choices: shuffle([meaning, ...wrongChoices])
         });
     }
  
-    // TYPE 2: Sentence fill-in-the-blank (if any sentences exist)
-    // sentences format: { "sentence with ____" : "answer" }
+    // TYPE 2: Sentence fill-in-the-blank
     for (var sentence in current_lesson_rps_data.sentences) {
         var answer = current_lesson_rps_data.sentences[sentence];
- 
-        // Build wrong choices from all rps terms
-        var allTerms = [
-            ...Object.keys(current_lesson_rps_data.roots),
-            ...Object.keys(current_lesson_rps_data.prefixes),
-            ...Object.keys(current_lesson_rps_data.suffixes)
-        ];
-        var wrongTerms = allTerms.filter(t => t !== answer);
-        wrongTerms = shuffle(wrongTerms).slice(0, 3);
- 
+        var allTerms = rpsEntries.map(e => e[0]);
+        var wrongTerms = shuffle(allTerms.filter(t => t !== answer)).slice(0, 3);
         if (wrongTerms.length < 1) continue;
- 
-        var choices = shuffle([answer, ...wrongTerms]);
  
         questions.push({
             type: "sentence",
             prompt: sentence,
             label: "Fill in the blank",
             correct: answer,
-            choices: choices
+            choices: shuffle([answer, ...wrongTerms])
         });
     }
  
-    // TYPE 2b: Word fill-in-the-blank (if any words exist)
-    // words format: { "word" : "definition or sentence" }
+    // TYPE 2b: Word identification
     for (var word in current_lesson_rps_data.words) {
         var wordAnswer = current_lesson_rps_data.words[word];
- 
-        var allTerms2 = [
-            ...Object.keys(current_lesson_rps_data.roots),
-            ...Object.keys(current_lesson_rps_data.prefixes),
-            ...Object.keys(current_lesson_rps_data.suffixes)
-        ];
-        var wrongTerms2 = allTerms2.filter(t => t !== wordAnswer);
-        wrongTerms2 = shuffle(wrongTerms2).slice(0, 3);
- 
+        var allTerms2 = rpsEntries.map(e => e[0]);
+        var wrongTerms2 = shuffle(allTerms2.filter(t => t !== wordAnswer)).slice(0, 3);
         if (wrongTerms2.length < 1) continue;
- 
-        var choices2 = shuffle([wordAnswer, ...wrongTerms2]);
  
         questions.push({
             type: "word",
             prompt: word,
             label: "Identify the root / prefix / suffix",
             correct: wordAnswer,
-            choices: choices2
+            choices: shuffle([wordAnswer, ...wrongTerms2])
         });
     }
  
@@ -142,13 +113,9 @@ function buildQuestions() {
 }
  
 function showQuestion(index) {
-    if (index >= allQuestions.length) {
-        endQuiz();
-        return;
-    }
+    if (index >= allQuestions.length) { endQuiz(); return; }
  
     var q = allQuestions[index];
- 
     document.getElementById("question-type").textContent = q.label;
     document.getElementById("prompt").textContent = q.prompt;
     document.getElementById("feedback").textContent = "";
@@ -167,40 +134,47 @@ function showQuestion(index) {
     }
  
     document.getElementById("score").textContent = `Question ${index + 1} of ${allQuestions.length}`;
+    active = true;
+    got_wrong = false;
 }
  
 function checkAnswer(selected) {
+    if (!active) return; //prevent clicking while locked
+ 
     var q = allQuestions[currentQuestionIndex];
- 
-    // Disable all buttons
-    var buttons = document.querySelectorAll("#answers button");
-    buttons.forEach(function(btn) {
-        btn.disabled = true;
-        if (btn.getAttribute("data-choice") === q.correct) {
-            btn.classList.add("correct");
-        } else if (btn.getAttribute("data-choice") === selected && selected !== q.correct) {
-            btn.classList.add("wrong");
-        }
-    });
- 
+    var btns = document.querySelectorAll("#answers button");
     var feedback = document.getElementById("feedback");
-    if (selected === q.correct) {
+ 
+    if (selected === q.correct) { //correct answer
+        btns.forEach(function(btn) {
+            if (btn.getAttribute("data-choice") === q.correct) btn.classList.add("correct");
+        });
+        active = false; //lock buttons
+ 
         feedback.textContent = "Correct!";
         feedback.style.color = "green";
-        correctAnswers++;
-    } else {
-        feedback.textContent = 'Incorrect! The answer was "' + q.correct + '".';
-        feedback.style.color = "red";
-    }
  
-    // Move to next question after a short delay
-    currentQuestionIndex++;
-    setTimeout(function() {
-        showQuestion(currentQuestionIndex);
-    }, 1200);
+        if (!got_wrong) { //only award point if first try
+            correctAnswers++;
+        }
+ 
+        currentQuestionIndex++;
+        setTimeout(function() { showQuestion(currentQuestionIndex); }, 1000);
+ 
+    } else { //wrong answer — highlight red, stay on question
+        btns.forEach(function(btn) {
+            if (btn.getAttribute("data-choice") === selected) btn.classList.add("wrong");
+        });
+ 
+        feedback.textContent = "Incorrect! Try again.";
+        feedback.style.color = "red";
+        got_wrong = true; //mark that they got it wrong
+    }
 }
  
 function endQuiz() {
+    saveScore("RPS Test", current_lessons, correctAnswers, allQuestions.length);
+ 
     document.getElementById("prompt").textContent = "";
     document.getElementById("question-type").textContent = "";
     document.getElementById("answers").innerHTML = "";

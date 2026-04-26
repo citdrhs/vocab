@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="admin.css">
+    <title>Admin Panel</title>
+</head>
+<body onload="admin_onload()">
+ 
+    <div id="admin-panel">
+        <div class="sidebar">
+            <h2>Admin</h2>
+            <button class="tab-btn active" onclick="showTab('results')">📊 Results</button>
+            <button class="tab-btn" onclick="showTab('createquiz')">➕ Create Quiz</button>
+            <button class="tab-btn return-btn" onclick="adminLogout()">← Logout</button>
+        </div>
+ 
+        <div class="main">
+ 
+            <!-- Results Tab -->
+            <div id="tab-results" class="tab-content">
+                <div class="tab-header">
+                    <h2>Student Results</h2>
+                    <button class="danger-btn" onclick="clearResults()">Clear All Results</button>
+                </div>
+ 
+                <!-- Filters -->
+                <div class="filters">
+                    <input type="text" id="filter-name" placeholder="Filter by name..." oninput="renderTable()" />
+                    <select id="filter-test" onchange="renderTable()">
+                        <option value="">All Test Types</option>
+                        <option value="Word Test">Word Test</option>
+                        <option value="Definition Test">Definition Test</option>
+                        <option value="Spelling Test">Spelling Test</option>
+                        <option value="Synonym Test">Synonym Test</option>
+                        <option value="Antonym Test">Antonym Test</option>
+                        <option value="RPS Test">RPS Test</option>
+                    </select>
+                    <input type="text" id="filter-lesson" placeholder="Filter by lesson..." oninput="renderTable()" />
+                </div>
+ 
+                <!-- Results Table -->
+                <div class="table-wrapper">
+                    <table id="results-table">
+                        <thead>
+                            <tr>
+                                <th onclick="sortBy('name')">Name ↕</th>
+                                <th onclick="sortBy('testType')">Test Type ↕</th>
+                                <th onclick="sortBy('lessons')">Lesson(s) ↕</th>
+                                <th onclick="sortBy('score')">Score ↕</th>
+                                <th onclick="sortBy('date')">Date & Time ↕</th>
+                            </tr>
+                        </thead>
+                        <tbody id="results-body"></tbody>
+                    </table>
+                    <p id="no-results" style="display:none; text-align:center; color:#888; margin-top:30px;">No results found.</p>
+                </div>
+ 
+                <div class="summary" id="summary"></div>
+            </div>
+ 
+            <!-- Create Quiz Tab (placeholder) -->
+            <div id="tab-createquiz" class="tab-content" style="display:none;">
+                <div class="tab-header">
+                    <h2>Create Quiz</h2>
+                </div>
+                <div class="placeholder-box">
+                    <p> This section is coming soon.</p>
+                    <p>Once your database is set up, you'll be able to add new words, roots, prefixes, suffixes, and entire lessons from here.</p>
+                </div>
+            </div>
+ 
+        </div>
+    </div>
+ 
+    <script src="admin.js"></script>
+</body>
+</html>

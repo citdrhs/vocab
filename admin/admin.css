@@ -1,0 +1,193 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f7fa;
+    color: #333;
+}
+ 
+/* ── Layout ── */
+#admin-panel {
+    display: flex;
+    height: 100vh;
+}
+ 
+.sidebar {
+    width: 200px;
+    background: #2c2c2c;
+    display: flex;
+    flex-direction: column;
+    padding: 20px 0;
+    gap: 6px;
+    flex-shrink: 0;
+}
+ 
+.sidebar h2 {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.3em;
+    letter-spacing: 1px;
+}
+ 
+.tab-btn {
+    background: none;
+    border: none;
+    color: #ccc;
+    padding: 12px 20px;
+    font-size: 0.95em;
+    cursor: pointer;
+    text-align: left;
+    border-left: 3px solid transparent;
+    transition: background 0.2s, color 0.2s;
+    width: 100%;
+    border-radius: 0;
+}
+ 
+.tab-btn:hover {
+    background: #3f3f3f;
+    color: white;
+    transform: none;
+}
+ 
+.tab-btn.active {
+    background: #3f3f3f;
+    color: white;
+    border-left: 3px solid #45a049;
+}
+ 
+.return-btn {
+    margin-top: auto;
+    color: #aaa;
+}
+ 
+.main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+ 
+/* ── Tab Content ── */
+.tab-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+ 
+.tab-header h2 {
+    font-size: 1.6em;
+    color: #2c3e50;
+}
+ 
+/* ── Filters ── */
+.filters {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+ 
+.filters input,
+.filters select {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 0.95em;
+    font-family: Arial, sans-serif;
+    min-width: 160px;
+}
+ 
+/* ── Table ── */
+.table-wrapper {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    overflow: hidden;
+}
+ 
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+ 
+thead {
+    background: #3f3f3f;
+    color: white;
+}
+ 
+th {
+    padding: 14px 16px;
+    text-align: left;
+    font-size: 0.9em;
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+ 
+th:hover {
+    background: #555;
+}
+ 
+td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #eee;
+    font-size: 0.92em;
+}
+ 
+tbody tr:last-child td {
+    border-bottom: none;
+}
+ 
+tbody tr:hover {
+    background: #f9f9f9;
+}
+ 
+.score-cell {
+    font-weight: bold;
+}
+ 
+.score-high { color: #2e7d32; }
+.score-mid  { color: #f57c00; }
+.score-low  { color: #c62828; }
+ 
+/* ── Summary ── */
+.summary {
+    margin-top: 16px;
+    font-size: 0.9em;
+    color: #666;
+}
+ 
+/* ── Buttons ── */
+.danger-btn {
+    background: #c62828;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: background 0.3s;
+}
+ 
+.danger-btn:hover {
+    background: #e53935;
+    transform: none;
+}
+ 
+/* ── Placeholder ── */
+.placeholder-box {
+    background: white;
+    border-radius: 8px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    color: #555;
+    line-height: 2;
+    font-size: 1.1em;
+}
+ 
