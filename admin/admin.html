@@ -7,25 +7,23 @@
     <title>Admin Panel</title>
 </head>
 <body onload="admin_onload()">
- 
+
     <div id="admin-panel">
         <div class="sidebar">
             <h2>Admin</h2>
-            <button class="tab-btn active" onclick="showTab('results')"> Results</button>
-            <button class="tab-btn" onclick="showTab('createquiz')"> Create Quiz</button>
+            <button class="tab-btn active" onclick="showTab('results')">📊 Results</button>
+            <button class="tab-btn" onclick="showTab('createquiz')">➕ Create Quiz</button>
             <button class="tab-btn return-btn" onclick="adminLogout()">← Logout</button>
         </div>
- 
+
         <div class="main">
- 
+
             <!-- Results Tab -->
             <div id="tab-results" class="tab-content">
                 <div class="tab-header">
                     <h2>Student Results</h2>
                     <button class="danger-btn" onclick="clearResults()">Clear All Results</button>
                 </div>
- 
-                <!-- Filters -->
                 <div class="filters">
                     <input type="text" id="filter-name" placeholder="Filter by name..." oninput="renderTable()" />
                     <select id="filter-test" onchange="renderTable()">
@@ -39,8 +37,6 @@
                     </select>
                     <input type="text" id="filter-lesson" placeholder="Filter by lesson..." oninput="renderTable()" />
                 </div>
- 
-                <!-- Results Table -->
                 <div class="table-wrapper">
                     <table id="results-table">
                         <thead>
@@ -56,24 +52,133 @@
                     </table>
                     <p id="no-results" style="display:none; text-align:center; color:#888; margin-top:30px;">No results found.</p>
                 </div>
- 
                 <div class="summary" id="summary"></div>
             </div>
- 
-            <!-- Create Quiz Tab (placeholder) -->
+
+            <!-- Create Quiz Tab -->
             <div id="tab-createquiz" class="tab-content" style="display:none;">
                 <div class="tab-header">
-                    <h2>Create Quiz</h2>
+                    <h2>Create / Edit Quiz</h2>
                 </div>
-                <div class="placeholder-box">
-                    <p> This section is coming soon.</p>
-                    <p>Once your database is set up, you'll be able to add new words, roots, prefixes, suffixes, and entire lessons from here.</p>
+
+                <div class="sub-tabs">
+                    <button class="sub-tab-btn active" onclick="showSubTab('addword')">Add / Edit Word</button>
+                    <button class="sub-tab-btn" onclick="showSubTab('addrps')">Add / Edit RPS</button>
+                    <button class="sub-tab-btn" onclick="showSubTab('delete')">Delete</button>
+                    <button class="sub-tab-btn" onclick="showSubTab('manage')">Manage Lessons</button>
                 </div>
+
+                <!-- Add / Edit Word -->
+                <div id="subtab-addword" class="sub-tab-content">
+                    <h3>Add / Edit Word</h3>
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label>Lesson Number</label>
+                            <input type="text" id="aw-lesson" placeholder="e.g. 12 or 13 (new)" />
+                        </div>
+                        <div class="form-row">
+                            <label>Word</label>
+                            <input type="text" id="aw-word" placeholder="e.g. deluge" />
+                        </div>
+                        <div class="form-row">
+                            <label>Part of Speech</label>
+                            <input type="text" id="aw-ps" placeholder="e.g. noun" />
+                        </div>
+                        <div class="form-row">
+                            <label>Definition</label>
+                            <input type="text" id="aw-def" placeholder="e.g. a flood; an overwhelming rush" />
+                        </div>
+                        <div class="form-row">
+                            <label>Example Sentence</label>
+                            <input type="text" id="aw-ex" placeholder="Use ____ where the word goes" />
+                        </div>
+                        <div class="form-row">
+                            <label>Synonyms</label>
+                            <input type="text" id="aw-syn" placeholder="comma separated e.g. inundation, surge" />
+                        </div>
+                        <div class="form-row">
+                            <label>Antonyms</label>
+                            <input type="text" id="aw-ant" placeholder="comma separated e.g. drought, dearth" />
+                        </div>
+                    </div>
+                    <p class="form-error" id="aw-error"></p>
+                    <p class="form-success" id="aw-success"></p>
+                    <div class="form-buttons">
+                        <button onclick="saveWord()">Save Word</button>
+                        <button class="secondary-btn" onclick="loadWordForEdit()">Load Word to Edit</button>
+                    </div>
+                </div>
+
+                <!-- Add / Edit RPS -->
+                <div id="subtab-addrps" class="sub-tab-content" style="display:none;">
+                    <h3>Add / Edit RPS</h3>
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label>Lesson Number</label>
+                            <input type="text" id="rps-lesson" placeholder="e.g. 12 or 13 (new)" />
+                        </div>
+                        <div class="form-row">
+                            <label>Type</label>
+                            <select id="rps-type">
+                                <option value="roots">Root</option>
+                                <option value="prefixes">Prefix</option>
+                                <option value="suffixes">Suffix</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label>Term</label>
+                            <input type="text" id="rps-term" placeholder="e.g. patr" />
+                        </div>
+                        <div class="form-row">
+                            <label>Meaning</label>
+                            <input type="text" id="rps-meaning" placeholder="e.g. father" />
+                        </div>
+                    </div>
+                    <p class="form-error" id="rps-error"></p>
+                    <p class="form-success" id="rps-success"></p>
+                    <button onclick="saveRPS()">Save RPS Entry</button>
+                </div>
+
+                <!-- Delete -->
+                <div id="subtab-delete" class="sub-tab-content" style="display:none;">
+                    <h3>Delete Entry</h3>
+                    <div class="form-grid">
+                        <div class="form-row">
+                            <label>Lesson Number</label>
+                            <input type="text" id="del-lesson" placeholder="e.g. 12" oninput="populateDeleteOptions()" />
+                        </div>
+                        <div class="form-row">
+                            <label>Type</label>
+                            <select id="del-type" onchange="populateDeleteOptions()">
+                                <option value="word">Word</option>
+                                <option value="rps">RPS Entry</option>
+                            </select>
+                        </div>
+                        <div class="form-row">
+                            <label>Entry</label>
+                            <select id="del-entry">
+                                <option value="">-- enter lesson number first --</option>
+                            </select>
+                        </div>
+                    </div>
+                    <p class="form-error" id="del-error"></p>
+                    <p class="form-success" id="del-success"></p>
+                    <button class="danger-btn" onclick="deleteEntry()">Delete Entry</button>
+                </div>
+
+                <!-- Manage Lessons -->
+                <div id="subtab-manage" class="sub-tab-content" style="display:none;">
+                    <h3>Manage Lessons</h3>
+                    <p style="color:#666; margin-bottom:16px;">Locally added lessons can be deleted. Lessons from lessondata.js cannot.</p>
+                    <div id="manage-lessons-list"></div>
+                </div>
+
             </div>
- 
+
         </div>
     </div>
- 
+
+    <script src="../lessondata.js"></script>
     <script src="admin.js"></script>
 </body>
 </html>

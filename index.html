@@ -2,7 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="refresh" content="0; url=login/login.html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Vocabulary Practice</title>
 </head>
-<body></body>
+<body class="container" onload="index_onload()">
+    <div style="position:fixed; top:15px; right:15px; display:flex; gap:10px; align-items:center;">
+        <span id="welcome-text" style="font-size:0.9em; color:#555;"></span>
+        <button onclick="logout()" style="padding:6px 14px; font-size:0.85em; background:#3f3f3f; color:white; border:none; border-radius:5px; cursor:pointer;">Logout</button>
+    </div>
+
+    <h1>Vocabulary Tests</h1>
+    <p>Select your vocabulary lesson(s)</p>
+
+    <div class="lesson_container" id="lesson_container">
+        <!-- dynamically filled by lessons.js -->
+    </div>
+
+    <dl></dl>
+    <a href="../lessons/lessons.html" id="gotoall"><button class="allbutton">Start selected lessons</button></a>
+
+    <script src="../lessons/lessons.js"></script>
+    <script src="../lessondata.js"></script>
+</body>
 </html>
