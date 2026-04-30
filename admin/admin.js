@@ -383,3 +383,4 @@ function clearResults() {
         renderTable();
     }
 }
+
