@@ -1,0 +1,124 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+ 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f7fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+ 
+.login-wrapper {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+ 
+.card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    max-width: 400px;
+}
+ 
+.card h1 {
+    font-size: 1.8em;
+    color: #2c3e50;
+    margin-bottom: 6px;
+    text-align: center;
+}
+ 
+.subtitle {
+    text-align: center;
+    color: #888;
+    font-size: 0.95em;
+    margin-bottom: 28px;
+}
+ 
+.form-group {
+    margin-bottom: 16px;
+}
+ 
+.form-group label {
+    display: block;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #444;
+    margin-bottom: 6px;
+}
+ 
+.form-group input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1em;
+    font-family: inherit;
+    transition: border-color 0.3s;
+    outline: none;
+}
+ 
+.form-group input:focus {
+    border-color: #4586ff;
+}
+ 
+button {
+    width: 100%;
+    padding: 12px;
+    background: #3f3f3f;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.05em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    margin-top: 6px;
+    font-family: inherit;
+}
+ 
+button:hover {
+    background: #45a049;
+    transform: scale(1.02);
+}
+ 
+.error {
+    color: #c62828;
+    font-size: 0.88em;
+    min-height: 1.2em;
+    margin-bottom: 8px;
+    text-align: center;
+}
+ 
+.success {
+    color: #2e7d32;
+    font-size: 0.88em;
+    min-height: 1.2em;
+    margin-bottom: 8px;
+    text-align: center;
+}
+ 
+.switch {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.9em;
+    color: #666;
+}
+ 
+.switch a {
+    color: #4586ff;
+    text-decoration: none;
+    font-weight: bold;
+}
+ 
+.switch a:hover {
+    text-decoration: underline;
+}
