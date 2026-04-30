@@ -1,209 +1,586 @@
 var lesson_data = { //all of the data for each of the lessons
     "1" : {
-        "words" : { "Licentious":{
-            "ps" : "adjective",
-            "def" : "morally unrestrained",
-            "ex" : "Like St. Augustine, some people want to abandon thier styles, but not immediatly.",
-            "ant" :["Chaste", "Pure"], 
-            "syn" :["Immoral","Lewd"],
+        "words" : {
+            "Licentious": {
+                "ps" : "adjective",
+                "def" : "morally unrestrained",
+                "ex" : "Like St. Augustine, some people want to abandon thier styles, but not immediatly.",
+                "ant" :["Chaste", "Pure"], 
+                "syn" :["Immoral","Lewd"],
+            },
 
-        },
+            "Numismatist":{
+                "ps" : "noun",
+                "def" : "a coin collector",
+                "ex" : "My father is a numismatist",
+                "ant" :["who whoem colection coins"], 
+                "syn" :["not a collecter of coins"],
+            },
 
-        "   Numismatist":{
-            "ps" : "noun",
-            "def" : "a coin collector",
-            "ex" : "My father is a numismatist",
-            "ant" :["who whoem colection coins"], 
-            "syn" :["not a collecter of coins"],
-        },
+            "Paucity":{
+                "ps" : "noun",
+                "def" : "a scacity,lack",
+                "ex" : "The paucity of jobs in the small town forced jack to find work elsewhere",
+                "ant" :["abundance"], 
+                "syn" :["insufficiency"],
+            },
 
-        "Paucity":{
-            "ps" : "noun",
-            "def" : "a scacity,lack",
-            "ex" : "The paucity of jobs in the small town forced jack to find work elsewhere",
-            "ant" :["abundance"], 
-            "syn" :["insufficiency"],
-        },
+            "fatalistic":{
+                "ps" : "adjective",
+                "def" : "believing that all events in life are inevitable and determined by fate",
+                "ex" : "Fatalistic thinkers believe that there is nothing they can do to change the course of their lives",
+                "ant" :["N/A"], 
+                "syn" :["N/A"],
+            },
 
-        "fatalistic":{
-            "ps" : "adjective",
-            "def" : "believing that all events in life are inevitable and determined by fate",
-            "ex" : "Fatalistic thinkers believe that there is nothing they can do to change the course of their lives",
-            "ant" :["N/A"], 
-            "syn" :["N/A"],
-        },
+            "obtrude":{
+                "ps" : "verb",
+                "def" : "to force oneself into a situation uninvited.",
+                "ex" : "you were concentrating intently at the workon yur desk, so I did not wish to obtrude",
+                "ant" :["extricate"], 
+                "syn" :["impose","intrude"],
+            },
 
-        "obtrude":{
-            "ps" : "verb",
-            "def" : "to force oneself into a situation uninvited.",
-            "ex" : "you were concentrating intently at the workon yur desk, so I did not wish to obtrude",
-            "ant" :["extricate"], 
-            "syn" :["impose","intrude"],
-        },
+            "pensive":{
+                "ps" : "adjective",
+                "def" : "dreamily thoughtful",
+                "ex" : "Jane was in a pensive mood after she finished reading the thought-provoking novel",
+                "ant" :["silly","frivolous"], 
+                "syn" :["reflective","meditative"],
+            },
 
-        "pensive":{
-            "ps" : "adjective",
-            "def" : "dreamily thoughtful",
-            "ex" : "Jane was in a pensive mood after she finished reading the thought-provoking novel",
-            "ant" :["silly","frivolous"], 
-            "syn" :["reflective","meditative"],
-        },
+            "lackadasical":{
+                "ps" : "adjective",
+                "def" : "uninterested; listless",
+                "ex" : "The lackadaisical student sat in the detention hall and stared out the window",
+                "ant" :["enyhusiastic","inspired"], 
+                "syn" :["spiritless","apathetic","languid"],
+            },
 
-        "lackadasical":{
-            "ps" : "adjective",
-            "def" : "uninterested; listless",
-            "ex" : "The lackadaisical student sat in the detention hall and stared out the window",
-            "ant" :["enyhusiastic","inspired"], 
-            "syn" :["spiritless","apathetic","languid"],
-        },
+            "alienate":{
+                "ps" : "verb",
+                "def" : "to turn away feelings or affections",
+                "ex" : "Your sarcastic remarks might alienate your friends and family",
+                "ant" :["endear","unite"], 
+                "syn" :["extrange","set against"],
+            },
 
-        "alienate":{
-            "ps" : "verb",
-            "def" : "to turn away feelings or affections",
-            "ex" : "Your sarcastic remarks might alienate your friends and family",
-            "ant" :["endear","unite"], 
-            "syn" :["extrange","set against"],
-        },
+            "elated":{
+                "ps" : "adjective",
+                "def" : "in high spirits; exulatantlu proud and joyful",
+                "ex" : "we were elated to learn that our team would move on to finals",
+                "ant" :["depressed"], 
+                "syn" :["overjoyed"],
+            },
 
-        "elated":{
-            "ps" : "adjective",
-            "def" : "in high spirits; exulatantlu proud and joyful",
-            "ex" : "we were elated to learn that our team would move on to finals",
-            "ant" :["depressed"], 
-            "syn" :["overjoyed"],
+            "epigram":{
+                "ps" : "noun",
+                "def" : "a witty saying expressig a single thought or observation",
+                "ex" : "the author placed relevent epigrams at the begining of each chapter.",
+                "ant" :[], 
+                "syn" :["aphorism","bon mot", "quip"],
+            }
         },
-
-        "epigram":{
-            "ps" : "noun",
-            "def" : "a witty saying expressig a single thought or observation",
-            "ex" : "the author placed relevent epigrams at the begining of each chapter.",
-            "ant" :["N/A"], 
-            "syn" :["aphorism","bon mot", "quip"],
-        },
+        "rps" : {
 
         }
     },
     "2" : {
-        "words" : {"deluge" : { //the word
+        "words" : {
+            "deluge" : { //the word
+                "ps" : "noun", //part of speech
+                "def" : "a flood; an overwhelming rush", //defenition
+                "ex" : "The new amusement park experienced a ____ of visitors on opening day.", //example sentence, _ x4 is where the word goes
+                "ant" : ["drought", "dearth"], //antonyms
+                "syn" : ["inundation", "surge"] //synonyms
+            },
+
+            "catholic" : {
+                "ps" : "adjective",
+                "def" : "universal; wide-ranging",
+                "ex" : "His ____ interests made him quite knowledgeable in may subjects",
+                "ant" : ["provincial", "limited", "parochial"],
+                "syn" : ["broad"]
+            },
+
+            "eerie" : {
+                "ps" : "adjective",
+                "def" : "weird; mysterious; strange and frightening",
+                "ex" : "No one accepted the dare to stay in the ____ old mansion for one night.",
+                "ant" : ["common", "ordinary"],
+                "syn" : ["creepy", "sinister"]
+            },
+
+            "martial" : {
+                "ps" : "adjective",
+                "def" : "warlike; relating to the military",
+                "ex" : "A state of ____ law was declared in the small country in the weeks following the overthrow of the government.",
+                "ant" : [],
+                "syn" : []
+            },
+
+            "anthropomorphic" : {
+                "ps" : "adjective",
+                "def" : "attributing human characteristics or qualities to objects, animals, or gods",
+                "ex" : "____ stories might feature pigs and rabbits walking upright wearing clothes, and speaking to each other in human languages.",
+                "ant" : [],
+                "syn" : []
+            },
+
+            "beneficiary" : {
+                "ps" : "noun",
+                "def" : "one who receives benefits",
+                "ex" : "John was the sole ____ of his Uncle Martin’s vast estate.",
+                "ant" : [],
+                "syn" : ["recipient", "heir"]
+            },
+
+            "careen" : {
+                "ps" : "verb",
+                "def" : "to swerve or lurch from side to side while in motion",
+                "ex" : "The torrential winds caused the ship to ____ violently.",
+                "ant" : [],
+                "syn" : ["tilt"]
+            },
+
+            "aplomb" : {
+                "ps" : "noun",
+                "def" : "self-confidence",
+                "ex" : "The ____ of the young dancer astonished the veterans of the troupe.",
+                "ant" : ["awkwardness"],
+                "syn" : ["assurance", "poise"]
+            },
+
+            "guile" : {
+                "ps" : "noun",
+                "def" : "slyness and cunning in dealing with others",
+                "ex" : "Brad’s ____ contributed to his wealth, but it also created enemies.",
+                "ant" : ["honesty"],
+                "syn" : ["craftiness", "astuteness"]
+            },
+
+            "modicum" : {
+                "ps" : "noun",
+                "def" : "a small amount",
+                "ex" : "A sudden shower gave us a ____ of relief from the heat and humidity.",
+                "ant" : ["abundance"],
+                "syn" : ["bit"]
+            },
+
+            "rancid" : {
+                "ps" : "adjective",
+                "def" : "having a bad taste ",
+                "ex" : "The bitter fight over child custody left a ____ taste in both lawyers' mouths.",
+                "ant" : ["fresh"],
+                "syn" : ["rotten", "repulsive"]
+            },
+
+            "havoc" : {
+                "ps" : "noun",
+                "def" : "great destruction; chaos",
+                "ex" : "The commandos wreaked ____ throughout the area when they infiltrated the secret base.",
+                "ant" : ["order"],
+                "syn" : ["mayhem", "disorder"]
+            },
+
+            "pall" : {
+                "ps" : "noun",
+                "def" : "something that covers or conceals",
+                "ex" : "A ____ of gloom descended over the crowd.",
+                "ant" : [],
+                "syn" : ["shroud"]
+            },
+
+            "languish" : {
+                "ps" : "verb",
+                "def" : "to become weak or feeble; to lose strength",
+                "ex" : "I ____ed at the thought of all the work that still needed to be done",
+                "ant" : ["thrive"],
+                "syn" : ["wither", "fade"]
+            },
+
+            "fester" : {
+                "ps" : "verb",
+                "def" : "to grow embittered over time; to rot",
+                "ex" : "If allowed to ____, dislike can turn into bitter hatred.",
+                "ant" : [],
+                "syn" : ["aggravated", "worsen"]
+            }
+        }
+    },
+    "3" : {
+        "words" : {
+            "edifice" : { //the word
             "ps" : "noun", //part of speech
-            "def" : "a flood; an overwhelming rush", //defenition
-            "ex" : "The new amusement park experienced a ____ of visitors on opening day.", //example sentence, _ x4 is where the word goes
-            "ant" : ["drought", "dearth"], //antonyms
-            "syn" : ["inundation", "surge"] //synonyms
-        },
+            "def" : "a large, elaborate structure; and imposing building", //defenition
+            "ex" : "The palace was not just a home; it was an edifice that created envy among foreign rulers", //example sentence, _ x4 is where the word goes
+            "ant" : ["hovel"], //antonyms
+            "syn" : ["fortress"] //synonyms
+            },
 
-        "catholic" : {
-            "ps" : "adjective",
-            "def" : "universal; wide-ranging",
-            "ex" : "His ____ interests made him quite knowledgeable in may subjects",
-            "ant" : ["provincial", "limited", "parochial"],
-            "syn" : ["broad"]
-        },
+            "ambidextrous" : {
+                "ps" : "adjective",
+                "def" : "equely skillful with either hand",
+                "ex" : "the ambidextrous woman could write both left-and right-handed",
+                "ant" : [],
+                "syn" : []
+            },
 
-        "eerie" : {
-            "ps" : "adjective",
-            "def" : "weird; mysterious; strange and frightening",
-            "ex" : "No one accepted the dare to stay in the ____ old mansion for one night.",
-            "ant" : ["common", "ordinary"],
-            "syn" : ["creepy", "sinister"]
-        },
+            "belated" : {
+                "ps" : "adjective",
+                "def" : "delayed",
+                "ex" : "joan sent a belated birthday card to her sister",
+                "ant" : ["timely"],
+                "syn" : ["tardy","late"]
+            },
 
-        "martial" : {
-            "ps" : "adjective",
-            "def" : "warlike; relating to the military",
-            "ex" : "A state of ____ law was declared in the small country in the weeks following the overthrow of the government.",
-            "ant" : [],
-            "syn" : []
-        },
+            "animate" : {
+                "ps" : "verb",
+                "def" : "to give life or motion to",
+                "ex" : "a trip to the ive cream parlor helped animate the sullen child",
+                "ant" : ["quell"],
+                "syn" : ["enliven","excite","encourage"]
+            },
+            "kneed" : {
+                "ps" : "verb",
+                "def" : "to work dough or clay into a uniform mixture",
+                "ex" : "it is easier to kneed dough with an electric mixer than by hand",
+                "ant" : [],
+                "syn" : ["squeeze","rub","press"]
+            },
 
-        "anthropomorphic" : {
-            "ps" : "adjective",
-            "def" : "attributing human characteristics or qualities to objects, animals, or gods",
-            "ex" : "____ stories might feature pigs and rabbits walking upright wearing clothes, and speaking to each other in human languages.",
-            "ant" : [],
-            "syn" : []
-        },
+            "chauvinist" : {
+                "ps" : "noun",
+                "def" : "one having a fanatical devotion to a country, gender, or religion with contempt for other countries, the opposite sex, or other beliefs",
+                "ex" : "he did not dislike women, but he was a chauvinist when it came to hiering women for management positions",
+                "ant" : [],
+                "syn" : []
+            },
 
-        "beneficiary" : {
-            "ps" : "noun",
-            "def" : "one who receives benefits",
-            "ex" : "John was the sole ____ of his Uncle Martin’s vast estate.",
-            "ant" : [],
-            "syn" : ["recipient", "heir"]
-        },
+            "egalitarian" : {
+                "ps" : "adjective",
+                "def" : "promoting equel rights for all people",
+                "ex" : "the equal rights amendment for women was founded on egalitarian principles",
+                "ant" : ["elitist"],
+                "syn" : []
+            },
 
-        "careen" : {
+            "berserk" : {
+                "ps" : "adjective",
+                "def" : "in a state of violent or destructive rage",
+                "ex" : "my father almost went berserk when i told him i had dented his new car",
+                "ant" : ["placid","complacent"],
+                "syn" : ["frenzied"]
+            },
+
+            "ostentatious" : {
+                "ps" : "adjective",
+                "def" : "marked by a conspicuous, shaowy, or pretentious display",
+                "ex" : "the ostentatious charity ball cost the quests $2,000 per plate",
+                "ant" : ["unobtrusive","bland"],
+                "syn" : ["grandiose"]
+            },
+
+            "delude" : {
+                "ps" : "verb",
+                "def" : "to mislead;fool",
+                "ex" : "the fast-talking salesman could not delude us into buying the dilapidated truck",
+                "ant" : ["enlighten"],
+                "syn" : ["deceive"]
+            },
+        },
+        "rps" : {
+            "roots" : {
+                "mater" : "mother",
+                "micro":"small",
+                "meter":"measure",
+                "aut":"self"
+            },
+
+            "prefixes" : {},
+
+            "suffixes" : {},
+
+            "words" : {},
+
+            "sentences" : {}
+        }
+    },
+    "4" : {
+        "words" : {
+            "elude" : {
             "ps" : "verb",
-            "def" : "to swerve or lurch from side to side while in motion",
-            "ex" : "The torrential winds caused the ship to ____ violently.",
-            "ant" : [],
-            "syn" : ["tilt"]
-        },
+            "def" : "the escape notice;to get away from",
+            "ex" : "the prisoner tried to elude the guards by hiding in the laundry truck",
+            "ant" : ["attract"],
+            "syn" : ["avoid","evade","lose"]
+            },
 
-        "aplomb" : {
-            "ps" : "noun",
-            "def" : "self-confidence",
-            "ex" : "The ____ of the young dancer astonished the veterans of the troupe.",
-            "ant" : ["awkwardness"],
-            "syn" : ["assurance", "poise"]
+            "fallow" : {
+                "ps" : "adjective",
+                "def" : "inactive unproductive",
+                "ex" : "a fallow mind needs to be stimulated with challenging ideas and projects",
+                "ant" : ["fertile", "productive"],
+                "syn" : ["idle","barren"]
+            },
+            "blight" : {
+                "ps" : "noun",
+                "def" : "anything that destroyed, prevents growth, or causes devaluation",
+                "ex" : "the junkyard was a blight on the otherwise appealing neighborhood",
+                "ant" : ["enhancement"],
+                "syn" : ["affiction","disease"]
+            },
+            "obsequy" : {
+                "ps" : "noun",
+                "def" : "a funeral rite or ceremoney",
+                "ex" : "the explorers held brief obsequis for thier fallen leader before burrying him on the side of the mountain",
+                "ant" : [],
+                "syn" : []
+            },
+            "denizen" : {
+                "ps" : "noun",
+                "def" : "a occupant;inhabitant",
+                "ex" : "prairiie dogs are denezins of the great plain, so it is unlikely that you would see one in maine",
+                "ant" : ["emigrant","alien"],
+                "syn" : ["resident"]
+            },
+            "fealty" : {
+                "ps" : "noun",
+                "def" : "obligated loyalty or faithulness",
+                "ex" : "peasant who did not show any fealty to the doke often disapeared",
+                "ant" : ["disloyalty","treachery"],
+                "syn" : ["devotion","fidelity","allegiance"]
+            },
+            "entice" : {
+                "ps" : "verb",
+                "def" : "to attract by offering reward or pleasure",
+                "ex" : "the styling and colour of the gown enticed me, but i could not afford such an extravagant purchase",
+                "ant" : ["discourage"],
+                "syn" : ["temp","lure"]
+            },
+            "gratify" : {
+                "ps" : "verb",
+                "def" : "to please",
+                "ex" : "to gratify the pouting child, his mother handed him a lollipop",
+                "ant" : ["displeas","disappoint"],
+                "syn" : ["satisfy", "indulge"]
+            },
+            "laggard" : {
+                "ps" : "noun",
+                "def" : "a slow person, expecially one who falls behind",
+                "ex" : "wear good shoes on the hike, or you'll be a laggard and delay the entire group",
+                "ant" : ["straggler","dawdler"],
+                "syn" : ["leader"]
+            },
+            "gambit" : {
+                "ps" : "noun",
+                "def" : "maneuver or action used to gain an advantage",
+                "ex" : "The general's gambit sacrificed any soldiers but ultimately won the battle",
+                "ant" : ["blunder"],
+                "syn" : ["strategy","ploy","maneuver"]
+            },
         },
+        "rps" : {
+            "roots" : {
+                "chroma" : "colour",
+                "morph" : "form or shape"
+            },
 
-        "guile" : {
-            "ps" : "noun",
-            "def" : "slyness and cunning in dealing with others",
-            "ex" : "Brad’s ____ contributed to his wealth, but it also created enemies.",
-            "ant" : ["honesty"],
-            "syn" : ["craftiness", "astuteness"]
-        },
+            "prefixes" : {
+                "mono":"one",
+                "poly":"many"
+            },
 
-        "modicum" : {
-            "ps" : "noun",
-            "def" : "a small amount",
-            "ex" : "A sudden shower gave us a ____ of relief from the heat and humidity.",
-            "ant" : ["abundance"],
-            "syn" : ["bit"]
-        },
+            "suffixes" : {},
 
-        "rancid" : {
+            "words" : {},
+
+            "sentences" : {}
+        }
+    },
+    "5" : {
+        "words" : {
+            "jaded" : {
             "ps" : "adjective",
-            "def" : "having a bad taste ",
-            "ex" : "The bitter fight over child custody left a ____ taste in both lawyers' mouths.",
+            "def" : "worn out; dulled, as from overindulgence",
+            "ex" : "kate became jaded about love after the third boyfriend in a month broke up with her",
             "ant" : ["fresh"],
-            "syn" : ["rotten", "repulsive"]
-        },
+            "syn" : ["exhausted","wearied"]
+            },
 
-        "havoc" : {
-            "ps" : "noun",
-            "def" : "great destruction; chaos",
-            "ex" : "The commandos wreaked ____ throughout the area when they infiltrated the secret base.",
-            "ant" : ["order"],
-            "syn" : ["mayhem", "disorder"]
+            "gist" : {
+                "ps" : "noun",
+                "def" : "the main point",
+                "ex" : "i never did understand the gist of the story",
+                "ant" : [],
+                "syn" : ["idea","essance"]
+            },
+            "advocate" : {
+                "ps" : "verb",
+                "def" : "to recommend; to speak in favor of",
+                "ex" : "the neutral organization does not advocate support of a particular candidate or position",
+                "ant" : ["oppose","contest"],
+                "syn" : ["promotr","encourage"]
+            },
+            "efface" : {
+                "ps" : "verb",
+                "def" : "to obliterate;wipe out",
+                "ex" : "he tried to efface his memories of her by burning all her pictures",
+                "ant" : ["enshrine"],
+                "syn" : ["erase"]
+            },
+            "charisma" : {
+                "ps" : "noun",
+                "def" : "personal appeal or attraction;magnetism",
+                "ex" : "the candidate had charisma and good looks, but little knowlege of important issues",
+                "ant" : [],
+                "syn" : ["charm"]
+            },
+            "ogre" : {
+                "ps" : "noun",
+                "def" : "a brute;a large monster; a frightful giant",
+                "ex" : "the ogre occasionally emerged from his mountain cave and terrorized the villagers",
+                "ant" : [],
+                "syn" : []
+            },
+            "mesmerize" : {
+                "ps" : "verb",
+                "def" : "to hypnotize",
+                "ex" : "the fast music and spinning dancers mesermized the audience",
+                "ant" : ["bore"],
+                "syn" : ["captivate","entrance"]
+            },
+            "entity" : {
+                "ps" : "noun",
+                "def" : "anything having existance, or physical or mystical",
+                "ex" : "ann thought she saw a ghostly entity hovering over the graveyard, but it turned out to be a flag",
+                "ant" : [],
+                "syn" : []
+            },
+            "bandy" : {
+                "ps" : "verb",
+                "def" : "to exchange words; to discuss casually",
+                "ex" : "Let's not bandy words about the deal any more; just sign the papers and leave, please",
+                "ant" : [],
+                "syn" : []
+            },
+            "dastardly" : {
+                "ps" : "adjective",
+                "def" : "cowardly and treacherous",
+                "ex" : "The dastardly theif stole money only from helpless, elderly people",
+                "ant" : ["righteous"],
+                "syn" : ["dishonorable","shameful"]
+            },
+        
         },
+        "rps" : {
+            "roots" : {
+                "fort" : "strong",
+                "graph" : "writting",
+                "gen" : "born or to produce or kind (type)"
+            },
 
-        "pall" : {
-            "ps" : "noun",
-            "def" : "something that covers or conceals",
-            "ex" : "A ____ of gloom descended over the crowd.",
-            "ant" : [],
-            "syn" : ["shroud"]
-        },
+            "prefixes" : {
+                "mono":"one"
+            },
 
-        "languish" : {
-            "ps" : "verb",
-            "def" : "to become weak or feeble; to lose strength",
-            "ex" : "I ____ed at the thought of all the work that still needed to be done",
-            "ant" : ["thrive"],
-            "syn" : ["wither", "fade"]
-        },
+            "suffixes" : {},
 
-        "fester" : {
-            "ps" : "verb",
-            "def" : "to grow embittered over time; to rot",
-            "ex" : "If allowed to ____, dislike can turn into bitter hatred.",
-            "ant" : [],
-            "syn" : ["aggravated", "worsen"]
+            "words" : {},
+
+            "sentences" : {}
+        }
+        
+    },
+    "6" : {
+        "words" : {
+            "nepotism" : {
+                "ps" : "noun",
+                "def" : "favoritism shown to family or friends by thoes in power, especially in business or hiring practices",
+                "ex" : "i was qualified for the job, but uncle mike refused to hire me because he did not want to be accused of nepotism",
+                "ant" : [],
+                "syn" : []
+            },
+            "begrude" : {
+                "ps" : "verb",
+                "def" : "to resent another's success;to envy",
+                "ex" : "craig, the younger brother, secretly begrudged brain's fortune",
+                "ant" : ["forgive"],
+                "syn" : ["resent"]
+            },
+            "mandarin" : {
+                "ps" : "noun",
+                "def" : "a influencial person; member of an elite group",
+                "ex" : "mandarins and bureaucrafts discussed the state of the economy durring the summit",
+                "ant" : [],
+                "syn" : []
+            },
+            "glutinous" : {
+                "ps" : "adjective",
+                "def" : "gluey;stickey",
+                "ex" : "the bread dough was in a glutinous mass that stuck to anything it touched",
+                "ant" : [],
+                "syn" : []
+            },
+            "enmity" : {
+                "ps" : "noun",
+                "def" : "deep-seated hostility, often mutual",
+                "ex" : "angry states revealed the mutual enmity between steve and his supervisor",
+                "ant" : ["freindship"],
+                "syn" : ["hatred","antgonism"]
+            },
+            "declaim" : {
+                "ps" : "verb",
+                "def" : "to speak in a dramatic, impassioned or blustering manner",
+                "ex" : "at the debate, each politician declaimed againt the policies of the others",
+                "ant" : ["whisper"],
+                "syn" : ["trumpet",]
+            },
+            "imbue" : {
+                "ps" : "verb",
+                "def" : "to inspire or influence; to saturate",
+                "ex" : "her hard-working mother imbued jane with a solid work ethic",
+                "ant" : [],
+                "syn" : ["instill","pervade"]
+            },
+            "gaff" : {
+                "ps" : "noun",
+                "def" : "a pole with a large hook on one end",
+                "ex" : "The fisherman used a gaff to grad the heavy swordfish onto the boat",
+                "ant" : [],
+                "syn" : []
+            },
+            "quaff" : {
+                "ps" : "verb",
+                "def" : "to drink in large quantities; to gulp",
+                "ex" : "the old captain quaffed his ale and then orderd another stein",
+                "ant" : ["sip"],
+                "syn" : ["guzzle","swig"]
+            },
+            "bibliophile" : {
+                "ps" : "noun",
+                "def" : "a lover of books",
+                "ex" : "the bibliophile was thrilled to get a job at the library",
+                "ant" : [],
+                "syn" : []
+            },
         },
-    }
+        "rps" : {
+            "roots" : {
+                "mort" : "death",
+                "voc and vok" :"call",
+            },
+
+            "prefixes" : {
+                "biblio":"book"
+            },
+
+            "suffixes" : {},
+
+            "words" : {},
+
+            "sentences" : {}
+        }
     },
     "7" : {
         "words": {
@@ -882,9 +1259,8 @@ var lesson_data = { //all of the data for each of the lessons
                 "syn" : ["aggravated", "worsen"]
             }
         },
-
-        "rps" : { //roots, prefixes, and suffixes
-            "roots" : { //all the roots
+        "rps" : {
+            "roots" : {
                 "patr" : "father",
                 "patern" : "father",
                 "scop" : "to watch",
@@ -893,17 +1269,13 @@ var lesson_data = { //all of the data for each of the lessons
                 "cent" : "100",
             },
 
-            "prefixes" : {}, //all the prefixes
+            "prefixes" : {},
 
-            "suffixes" : {}, //all the suffixes
+            "suffixes" : {},
 
-            "words" : { //words that have the roots, prefixes, and suffixes in them
+            "words" : {},
 
-            },
-
-            "sentences" : { //sentences that have the roots, prefixes, and suffixes in them
-
-            }
+            "sentences" : {}
         }
     }
 }
