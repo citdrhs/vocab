@@ -3,42 +3,54 @@ var current_lessons = []
 var wordcontainer = document.getElementById("word-container");
 var rpscontainer  = document.getElementById("rps-container");
 
-// ── Merge localStorage lessons into lesson_data ──
-function mergeLocalData() {
-    var local = JSON.parse(localStorage.getItem("local_lessons") || "{}");
+var API = "http://localhost:5000/api";
 
-    for (var lessonNum in local) {
-        if (!lesson_data[lessonNum]) {
-            lesson_data[lessonNum] = {
-                words: {},
-                rps: { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} }
-            };
-        }
+// ── Merge API lesson data into lesson_data ──
+function mergeLocalData(callback) {
+    fetch(API + "/lessons")
+    .then(function(r) { return r.json(); })
+    .then(function(apiLessons) {
+        for (var lessonNum in apiLessons) {
+            if (!lesson_data[lessonNum]) {
+                lesson_data[lessonNum] = {
+                    words: {},
+                    rps: { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} }
+                };
+            }
+            if (!lesson_data[lessonNum].rps) {
+                lesson_data[lessonNum].rps = { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} };
+            }
 
-        // Merge words
-        Object.assign(lesson_data[lessonNum].words, local[lessonNum].words || {});
+            // Merge words
+            Object.assign(lesson_data[lessonNum].words, apiLessons[lessonNum].words || {});
 
-        // Apply word deletions
-        var deletedWords = local[lessonNum].deletedWords || [];
-        deletedWords.forEach(function(w) { delete lesson_data[lessonNum].words[w]; });
+            // Apply word deletions
+            (apiLessons[lessonNum].deletedWords || []).forEach(function(w) {
+                delete lesson_data[lessonNum].words[w];
+            });
 
-        // Merge RPS
-        if (local[lessonNum].rps) {
-            Object.assign(lesson_data[lessonNum].rps.roots,     local[lessonNum].rps.roots     || {});
-            Object.assign(lesson_data[lessonNum].rps.prefixes,  local[lessonNum].rps.prefixes  || {});
-            Object.assign(lesson_data[lessonNum].rps.suffixes,  local[lessonNum].rps.suffixes  || {});
-            Object.assign(lesson_data[lessonNum].rps.words,     local[lessonNum].rps.words     || {});
-            Object.assign(lesson_data[lessonNum].rps.sentences, local[lessonNum].rps.sentences || {});
+            // Merge RPS
+            var rps = apiLessons[lessonNum].rps || {};
+            Object.assign(lesson_data[lessonNum].rps.roots,     rps.roots     || {});
+            Object.assign(lesson_data[lessonNum].rps.prefixes,  rps.prefixes  || {});
+            Object.assign(lesson_data[lessonNum].rps.suffixes,  rps.suffixes  || {});
+            Object.assign(lesson_data[lessonNum].rps.words,     rps.words     || {});
+            Object.assign(lesson_data[lessonNum].rps.sentences, rps.sentences || {});
 
             // Apply RPS deletions
-            var deletedRPS = local[lessonNum].deletedRPS || [];
-            deletedRPS.forEach(function(t) {
+            (apiLessons[lessonNum].deletedRPS || []).forEach(function(t) {
                 delete lesson_data[lessonNum].rps.roots[t];
                 delete lesson_data[lessonNum].rps.prefixes[t];
                 delete lesson_data[lessonNum].rps.suffixes[t];
             });
         }
-    }
+        if (callback) callback();
+    })
+    .catch(function() {
+        // If server is not running, just continue with lessondata.js only
+        console.warn("Could not reach server, using lessondata.js only.");
+        if (callback) callback();
+    });
 }
 
 // ── Auth helpers ──
@@ -62,15 +74,15 @@ function logout() {
 // ── Index page ──
 function index_onload() {
     requireLoginIndex();
-    mergeLocalData();
-
     sessionStorage.setItem("current_lessons", JSON.stringify([]))
     document.getElementById("gotoall").style.display = "none"
 
     var name = sessionStorage.getItem("student_name") || "";
     document.getElementById("welcome-text").textContent = "Welcome, " + name + "!";
 
-    renderLessonButtons();
+    mergeLocalData(function() {
+        renderLessonButtons();
+    });
 }
 
 function renderLessonButtons() {
@@ -128,26 +140,24 @@ function index_setLesson(lessonNum) {
 // ── Lessons page ──
 function lessons_onload() {
     requireLoginLessons();
-    mergeLocalData();
 
     current_lessons = JSON.parse(sessionStorage.getItem("current_lessons"));
     if (current_lessons.length == 0) { window.location.href = "../index/index.html"; }
 
-    var title = "Lesson ";
-    for (var num in current_lessons) {
-        if (title == "Lesson ") {
-            title += current_lessons[num];
-        } else {
-            title += ", " + current_lessons[num];
+    mergeLocalData(function() {
+        var title = "Lesson ";
+        for (var num in current_lessons) {
+            if (title == "Lesson ") { title += current_lessons[num]; }
+            else { title += ", " + current_lessons[num]; }
         }
-    }
-    document.getElementById("title").innerHTML = title;
+        document.getElementById("title").innerHTML = title;
 
-    wordcontainer.innerHTML = "";
-    for (var lesson in current_lessons) { addKards(current_lessons[lesson]); }
+        wordcontainer.innerHTML = "";
+        for (var lesson in current_lessons) { addKards(current_lessons[lesson]); }
 
-    rpscontainer.innerHTML = "";
-    for (var lesson in current_lessons) { addRPS(current_lessons[lesson]); }
+        rpscontainer.innerHTML = "";
+        for (var lesson in current_lessons) { addRPS(current_lessons[lesson]); }
+    });
 }
 
 function addKards(lessonID) {

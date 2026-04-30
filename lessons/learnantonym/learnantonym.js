@@ -20,35 +20,31 @@ function onload() {
     current_lessons = JSON.parse(sessionStorage.getItem("current_lessons"))
     if (current_lessons.length == 0) { window.location.href = "../../index/index.html"; }
 
-    var title = "Antonym quiz for lesson "
-    for (num in current_lessons) {
-        if (title == "Antonym quiz for lesson ") {
-            title += current_lessons[num]
-        } else {
-            title += ", " + current_lessons[num]
+    mergeLocalData(function() {
+        var title = "Antonym quiz for lesson "
+        for (num in current_lessons) {
+            if (title == "Antonym quiz for lesson ") { title += current_lessons[num] }
+            else { title += ", " + current_lessons[num] }
+            Object.assign(current_lesson_word_data, lesson_data[current_lessons[num]].words)
         }
-        Object.assign(current_lesson_word_data, lesson_data[current_lessons[num]].words)
-    }
 
-    document.getElementById("title").innerHTML = title
+        document.getElementById("title").innerHTML = title
 
-    for (word in current_lesson_word_data) {
-        for (i in current_lesson_word_data[word].ant) {
-            var data = {
-                "ant" : current_lesson_word_data[word].ant[i],
-                "word" : word
+        for (word in current_lesson_word_data) {
+            for (i in current_lesson_word_data[word].ant) {
+                var data = { "ant": current_lesson_word_data[word].ant[i], "word": word }
+                antonym_options.push(data)
+                all_options.push(data)
             }
-            antonym_options.push(data)
-            all_options.push(data)
         }
-    }
 
-    num_of_ants = antonym_options.length
-    document.getElementById("score").innerHTML = score + "/" + num_of_ants
-    document.getElementById("done").style.display = "none"
+        num_of_ants = antonym_options.length
+        document.getElementById("score").innerHTML = score + "/" + num_of_ants
+        document.getElementById("done").style.display = "none"
 
-    buttons = document.querySelectorAll("#anwsers button")
-    setQuestion()
+        buttons = document.querySelectorAll("#anwsers button")
+        setQuestion()
+    });
 }
 
 function setQuestion() {

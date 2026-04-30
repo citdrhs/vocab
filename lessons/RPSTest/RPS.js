@@ -13,37 +13,37 @@ function onload() {
     current_lessons = JSON.parse(sessionStorage.getItem("current_lessons"));
     if (current_lessons.length == 0) { window.location.href = "../../index/index.html"; }
 
-    var title = "RPS Test for Lesson ";
-    for (var num in current_lessons) {
-        if (title == "RPS Test for Lesson ") {
-            title += current_lessons[num];
-        } else {
-            title += ", " + current_lessons[num];
+    mergeLocalData(function() {
+        var title = "RPS Test for Lesson ";
+        for (var num in current_lessons) {
+            if (title == "RPS Test for Lesson ") { title += current_lessons[num]; }
+            else { title += ", " + current_lessons[num]; }
+
+            var rps = lesson_data[current_lessons[num]].rps;
+            if (rps) {
+                Object.assign(current_lesson_rps_data.roots,     rps.roots     || {});
+                Object.assign(current_lesson_rps_data.prefixes,  rps.prefixes  || {});
+                Object.assign(current_lesson_rps_data.suffixes,  rps.suffixes  || {});
+                Object.assign(current_lesson_rps_data.words,     rps.words     || {});
+                Object.assign(current_lesson_rps_data.sentences, rps.sentences || {});
+            }
         }
 
-        var rps = lesson_data[current_lessons[num]].rps;
-        Object.assign(current_lesson_rps_data.roots,     rps.roots);
-        Object.assign(current_lesson_rps_data.prefixes,  rps.prefixes);
-        Object.assign(current_lesson_rps_data.suffixes,  rps.suffixes);
-        Object.assign(current_lesson_rps_data.words,     rps.words);
-        Object.assign(current_lesson_rps_data.sentences, rps.sentences);
-    }
+        document.getElementById("title").innerHTML = title;
+        allQuestions = buildQuestions();
 
-    document.getElementById("title").innerHTML = title;
+        if (allQuestions.length === 0) {
+            document.getElementById("prompt").textContent = "No RPS data available for this lesson.";
+            document.getElementById("answers").innerHTML = "";
+            document.getElementById("question-type").textContent = "";
+            document.getElementById("score").textContent = "";
+            return;
+        }
 
-    allQuestions = buildQuestions();
-
-    if (allQuestions.length === 0) {
-        document.getElementById("prompt").textContent = "No RPS data available for this lesson.";
-        document.getElementById("answers").innerHTML = "";
-        document.getElementById("question-type").textContent = "";
-        document.getElementById("score").textContent = "";
-        return;
-    }
-
-    allQuestions = shuffle(allQuestions);
-    document.getElementById("score").textContent = `Question 1 of ${allQuestions.length}`;
-    showQuestion(0);
+        allQuestions = shuffle(allQuestions);
+        document.getElementById("score").textContent = `Question 1 of ${allQuestions.length}`;
+        showQuestion(0);
+    });
 }
 
 function buildQuestions() {

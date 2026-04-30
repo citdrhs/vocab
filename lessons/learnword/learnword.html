@@ -9,28 +9,28 @@
 <body onload="learnword_onload()">
     <h1 id="title">Word quiz for lesson 00</h1>
     <p id="question">definition</p>
- 
+
     <div id="anwsers">
         <button onclick="buttonClicked(0)">word A</button>
         <button onclick="buttonClicked(1)">word B</button>
         <button onclick="buttonClicked(2)">word C</button>
         <button onclick="buttonClicked(3)">word D</button>
     </div>
- 
+
     <p id="score">00/00</p>
- 
+
     <div id="done">
         <p>Completed!</p>
     </div>
- 
+
     <div class="buttons">
         <a href="../lessons.html"><button>return</button></a>
         <button onclick="location.reload()">restart</button>
     </div>
- 
+
     <script src="../../shared/scoretracker.js"></script>
+    <script src="../../shared/mergedata.js"></script>
     <script src="learnword.js"></script>
     <script src="../../lessondata.js"></script>
 </body>
 </html>
- 

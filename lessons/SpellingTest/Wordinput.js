@@ -14,21 +14,19 @@ function onload() {
     current_lessons = JSON.parse(sessionStorage.getItem("current_lessons"))
     if (current_lessons.length == 0) { window.location.href = "../../index/index.html"; }
 
-    var title = "Spelling test for lesson "
-    for (num in current_lessons) {
-        if (title == "Spelling test for lesson ") {
-            title += current_lessons[num]
-        } else {
-            title += ", " + current_lessons[num]
+    mergeLocalData(function() {
+        var title = "Spelling test for lesson "
+        for (num in current_lessons) {
+            if (title == "Spelling test for lesson ") { title += current_lessons[num] }
+            else { title += ", " + current_lessons[num] }
+            Object.assign(current_lesson_word_data, lesson_data[current_lessons[num]].words)
         }
-        Object.assign(current_lesson_word_data, lesson_data[current_lessons[num]].words)
-    }
 
-    document.getElementById("title").innerHTML = title
-
-    correctWord = getNewPrompt()
-    totalWords = Object.keys(current_lesson_word_data).length;
-    document.getElementById('score').textContent = `Correct answers: 0 out of ${totalWords}`;
+        document.getElementById("title").innerHTML = title
+        correctWord = getNewPrompt()
+        totalWords = Object.keys(current_lesson_word_data).length;
+        document.getElementById('score').textContent = `Correct answers: 0 out of ${totalWords}`;
+    });
 }
 
 function getNewPrompt() {

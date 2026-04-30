@@ -1,47 +1,7 @@
 var allResults = [];
 var sortKey = "date";
 var sortAsc = false;
-
-// ── Helpers to get merged lesson data ──
-function getLocalLessons() {
-    return JSON.parse(localStorage.getItem("local_lessons") || "{}");
-}
-
-function saveLocalLessons(data) {
-    localStorage.setItem("local_lessons", JSON.stringify(data));
-}
-
-function getMergedLesson(lessonNum) {
-    var local = getLocalLessons();
-    var base  = (lesson_data[lessonNum]) ? JSON.parse(JSON.stringify(lesson_data[lessonNum])) : {
-        words: {},
-        rps: { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} }
-    };
-
-    if (local[lessonNum]) {
-        // Merge words
-        Object.assign(base.words, local[lessonNum].words || {});
-        // Merge deletions
-        var deletedWords = local[lessonNum].deletedWords || [];
-        deletedWords.forEach(function(w) { delete base.words[w]; });
-        // Merge RPS
-        if (local[lessonNum].rps) {
-            Object.assign(base.rps.roots,     local[lessonNum].rps.roots     || {});
-            Object.assign(base.rps.prefixes,  local[lessonNum].rps.prefixes  || {});
-            Object.assign(base.rps.suffixes,  local[lessonNum].rps.suffixes  || {});
-            Object.assign(base.rps.words,     local[lessonNum].rps.words     || {});
-            Object.assign(base.rps.sentences, local[lessonNum].rps.sentences || {});
-            // Merge RPS deletions
-            var deletedRPS = local[lessonNum].deletedRPS || [];
-            deletedRPS.forEach(function(term) {
-                delete base.rps.roots[term];
-                delete base.rps.prefixes[term];
-                delete base.rps.suffixes[term];
-            });
-        }
-    }
-    return base;
-}
+var API = "http://localhost:5000/api";
 
 // ── Onload ──
 function admin_onload() {
@@ -81,7 +41,7 @@ function saveWord() {
     var lessonNum = document.getElementById("aw-lesson").value.trim();
     var word      = document.getElementById("aw-word").value.trim().toLowerCase();
     var ps        = document.getElementById("aw-ps").value.trim();
-    var def       = document.getElementById("aw-def").value.trim();
+    var def_      = document.getElementById("aw-def").value.trim();
     var ex        = document.getElementById("aw-ex").value.trim();
     var synRaw    = document.getElementById("aw-syn").value.trim();
     var antRaw    = document.getElementById("aw-ant").value.trim();
@@ -91,7 +51,7 @@ function saveWord() {
     errorEl.textContent   = "";
     successEl.textContent = "";
 
-    if (!lessonNum || !word || !ps || !def) {
+    if (!lessonNum || !word || !ps || !def_) {
         errorEl.textContent = "Lesson, word, part of speech and definition are required.";
         return;
     }
@@ -99,29 +59,24 @@ function saveWord() {
     var syn = synRaw ? synRaw.split(",").map(function(s) { return s.trim(); }).filter(Boolean) : [];
     var ant = antRaw ? antRaw.split(",").map(function(s) { return s.trim(); }).filter(Boolean) : [];
 
-    var local = getLocalLessons();
-
-    if (!local[lessonNum]) {
-        local[lessonNum] = { words: {}, deletedWords: [], rps: { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} }, deletedRPS: [] };
-    }
-
-    local[lessonNum].words[word] = { ps: ps, def: def, ex: ex, syn: syn, ant: ant };
-
-    // Remove from deletedWords if it was previously deleted
-    local[lessonNum].deletedWords = (local[lessonNum].deletedWords || []).filter(function(w) { return w !== word; });
-
-    saveLocalLessons(local);
-    successEl.textContent = "Word \"" + word + "\" saved to lesson " + lessonNum + "!";
-
-    // Clear form
-    document.getElementById("aw-word").value = "";
-    document.getElementById("aw-ps").value   = "";
-    document.getElementById("aw-def").value  = "";
-    document.getElementById("aw-ex").value   = "";
-    document.getElementById("aw-syn").value  = "";
-    document.getElementById("aw-ant").value  = "";
-
-    renderManageLessons();
+    fetch(API + "/lessons/add-word", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lesson_num: lessonNum, word: word, ps: ps, def: def_, ex: ex, syn: syn, ant: ant })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.error) { errorEl.textContent = data.error; return; }
+        successEl.textContent = data.message;
+        document.getElementById("aw-word").value = "";
+        document.getElementById("aw-ps").value   = "";
+        document.getElementById("aw-def").value  = "";
+        document.getElementById("aw-ex").value   = "";
+        document.getElementById("aw-syn").value  = "";
+        document.getElementById("aw-ant").value  = "";
+        renderManageLessons();
+    })
+    .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
 function loadWordForEdit() {
@@ -130,31 +85,32 @@ function loadWordForEdit() {
     var errorEl   = document.getElementById("aw-error");
 
     errorEl.textContent = "";
+    if (!lessonNum || !word) { errorEl.textContent = "Enter a lesson number and word to load."; return; }
 
-    if (!lessonNum || !word) {
-        errorEl.textContent = "Enter a lesson number and word to load.";
-        return;
-    }
-
-    var merged = getMergedLesson(lessonNum);
-    var data   = merged.words[word];
-
-    if (!data) {
-        errorEl.textContent = "Word \"" + word + "\" not found in lesson " + lessonNum + ".";
-        return;
-    }
-
-    document.getElementById("aw-ps").value  = data.ps  || "";
-    document.getElementById("aw-def").value = data.def || "";
-    document.getElementById("aw-ex").value  = data.ex  || "";
-    document.getElementById("aw-syn").value = (data.syn || []).join(", ");
-    document.getElementById("aw-ant").value = (data.ant || []).join(", ");
+    fetch(API + "/lessons/" + lessonNum)
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        var wordData = data.words[word];
+        if (!wordData) {
+            // Also check lessondata.js
+            if (lesson_data[lessonNum] && lesson_data[lessonNum].words[word]) {
+                wordData = lesson_data[lessonNum].words[word];
+            }
+        }
+        if (!wordData) { errorEl.textContent = 'Word "' + word + '" not found in lesson ' + lessonNum + '.'; return; }
+        document.getElementById("aw-ps").value  = wordData.ps  || "";
+        document.getElementById("aw-def").value = wordData.def || "";
+        document.getElementById("aw-ex").value  = wordData.ex  || "";
+        document.getElementById("aw-syn").value = (wordData.syn || []).join(", ");
+        document.getElementById("aw-ant").value = (wordData.ant || []).join(", ");
+    })
+    .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
 // ── Add / Edit RPS ──
 function saveRPS() {
     var lessonNum = document.getElementById("rps-lesson").value.trim();
-    var type      = document.getElementById("rps-type").value;
+    var type_     = document.getElementById("rps-type").value;
     var term      = document.getElementById("rps-term").value.trim().toLowerCase();
     var meaning   = document.getElementById("rps-meaning").value.trim();
     var errorEl   = document.getElementById("rps-error");
@@ -163,67 +119,81 @@ function saveRPS() {
     errorEl.textContent   = "";
     successEl.textContent = "";
 
-    if (!lessonNum || !term || !meaning) {
-        errorEl.textContent = "Lesson, term and meaning are required.";
-        return;
-    }
+    if (!lessonNum || !term || !meaning) { errorEl.textContent = "Lesson, term and meaning are required."; return; }
 
-    var local = getLocalLessons();
-
-    if (!local[lessonNum]) {
-        local[lessonNum] = { words: {}, deletedWords: [], rps: { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} }, deletedRPS: [] };
-    }
-    if (!local[lessonNum].rps) {
-        local[lessonNum].rps = { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} };
-    }
-
-    local[lessonNum].rps[type][term] = meaning;
-
-    // Remove from deletedRPS if previously deleted
-    local[lessonNum].deletedRPS = (local[lessonNum].deletedRPS || []).filter(function(t) { return t !== term; });
-
-    saveLocalLessons(local);
-    successEl.textContent = "\"" + term + "\" saved as " + type.slice(0, -1) + " in lesson " + lessonNum + "!";
-
-    document.getElementById("rps-term").value    = "";
-    document.getElementById("rps-meaning").value = "";
-
-    renderManageLessons();
+    fetch(API + "/lessons/add-rps", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lesson_num: lessonNum, type: type_, term: term, meaning: meaning })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.error) { errorEl.textContent = data.error; return; }
+        successEl.textContent = data.message;
+        document.getElementById("rps-term").value    = "";
+        document.getElementById("rps-meaning").value = "";
+        renderManageLessons();
+    })
+    .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
 // ── Delete ──
 function populateDeleteOptions() {
     var lessonNum = document.getElementById("del-lesson").value.trim();
-    var type      = document.getElementById("del-type").value;
+    var type_     = document.getElementById("del-type").value;
     var select    = document.getElementById("del-entry");
 
     select.innerHTML = "<option value=''>-- select entry --</option>";
-
     if (!lessonNum) return;
 
-    var merged = getMergedLesson(lessonNum);
+    // Get from both API and lessondata.js
+    fetch(API + "/lessons/" + lessonNum)
+    .then(function(r) { return r.json(); })
+    .then(function(apiData) {
+        var entries = {};
 
-    if (type === "word") {
-        Object.keys(merged.words).forEach(function(w) {
-            var opt = document.createElement("option");
-            opt.value = w;
-            opt.textContent = w;
-            select.appendChild(opt);
-        });
-    } else {
-        var allRPS = Object.assign({}, merged.rps.roots, merged.rps.prefixes, merged.rps.suffixes);
-        Object.keys(allRPS).forEach(function(t) {
-            var opt = document.createElement("option");
-            opt.value = t;
-            opt.textContent = t + " — " + allRPS[t];
-            select.appendChild(opt);
-        });
-    }
+        if (type_ === "word") {
+            // Merge lessondata.js words
+            if (lesson_data[lessonNum]) Object.assign(entries, lesson_data[lessonNum].words);
+            // Merge API words
+            Object.assign(entries, apiData.words || {});
+            // Remove deleted
+            (apiData.deletedWords || []).forEach(function(w) { delete entries[w]; });
+
+            Object.keys(entries).forEach(function(w) {
+                var opt = document.createElement("option");
+                opt.value = w; opt.textContent = w;
+                select.appendChild(opt);
+            });
+        } else {
+            var base = { roots: {}, prefixes: {}, suffixes: {} };
+            if (lesson_data[lessonNum] && lesson_data[lessonNum].rps) {
+                Object.assign(base.roots,    lesson_data[lessonNum].rps.roots    || {});
+                Object.assign(base.prefixes, lesson_data[lessonNum].rps.prefixes || {});
+                Object.assign(base.suffixes, lesson_data[lessonNum].rps.suffixes || {});
+            }
+            if (apiData.rps) {
+                Object.assign(base.roots,    apiData.rps.roots    || {});
+                Object.assign(base.prefixes, apiData.rps.prefixes || {});
+                Object.assign(base.suffixes, apiData.rps.suffixes || {});
+            }
+            (apiData.deletedRPS || []).forEach(function(t) {
+                delete base.roots[t]; delete base.prefixes[t]; delete base.suffixes[t];
+            });
+            var allRPS = Object.assign({}, base.roots, base.prefixes, base.suffixes);
+            Object.keys(allRPS).forEach(function(t) {
+                var opt = document.createElement("option");
+                opt.value = t; opt.textContent = t + " — " + allRPS[t];
+                select.appendChild(opt);
+            });
+        }
+    })
+    .catch(function() {});
 }
 
 function deleteEntry() {
     var lessonNum = document.getElementById("del-lesson").value.trim();
-    var type      = document.getElementById("del-type").value;
+    var type_     = document.getElementById("del-type").value;
     var entry     = document.getElementById("del-entry").value;
     var errorEl   = document.getElementById("del-error");
     var successEl = document.getElementById("del-success");
@@ -231,45 +201,27 @@ function deleteEntry() {
     errorEl.textContent   = "";
     successEl.textContent = "";
 
-    if (!lessonNum || !entry) {
-        errorEl.textContent = "Please select a lesson and entry.";
-        return;
-    }
+    if (!lessonNum || !entry) { errorEl.textContent = "Please select a lesson and entry."; return; }
+    if (!confirm('Delete "' + entry + '" from lesson ' + lessonNum + "?")) return;
 
-    if (!confirm("Delete \"" + entry + "\" from lesson " + lessonNum + "?")) return;
+    var endpoint = type_ === "word" ? "/lessons/delete-word" : "/lessons/delete-rps";
+    var body     = type_ === "word"
+        ? { lesson_num: lessonNum, word: entry }
+        : { lesson_num: lessonNum, term: entry };
 
-    var local = getLocalLessons();
-
-    if (!local[lessonNum]) {
-        local[lessonNum] = { words: {}, deletedWords: [], rps: { roots: {}, prefixes: {}, suffixes: {}, words: {}, sentences: {} }, deletedRPS: [] };
-    }
-
-    if (type === "word") {
-        // Delete from local additions
-        if (local[lessonNum].words && local[lessonNum].words[entry]) {
-            delete local[lessonNum].words[entry];
-        }
-        // Mark as deleted so it's hidden from lessondata.js too
-        if (!local[lessonNum].deletedWords) local[lessonNum].deletedWords = [];
-        if (!local[lessonNum].deletedWords.includes(entry)) {
-            local[lessonNum].deletedWords.push(entry);
-        }
-    } else {
-        if (local[lessonNum].rps) {
-            delete local[lessonNum].rps.roots[entry];
-            delete local[lessonNum].rps.prefixes[entry];
-            delete local[lessonNum].rps.suffixes[entry];
-        }
-        if (!local[lessonNum].deletedRPS) local[lessonNum].deletedRPS = [];
-        if (!local[lessonNum].deletedRPS.includes(entry)) {
-            local[lessonNum].deletedRPS.push(entry);
-        }
-    }
-
-    saveLocalLessons(local);
-    successEl.textContent = "\"" + entry + "\" deleted from lesson " + lessonNum + ".";
-    populateDeleteOptions();
-    renderManageLessons();
+    fetch(API + endpoint, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body)
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        if (data.error) { errorEl.textContent = data.error; return; }
+        successEl.textContent = data.message;
+        populateDeleteOptions();
+        renderManageLessons();
+    })
+    .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
 // ── Manage Lessons ──
@@ -277,40 +229,68 @@ function renderManageLessons() {
     var container = document.getElementById("manage-lessons-list");
     if (!container) return;
 
-    var local = getLocalLessons();
-    var allLessons = new Set([
-        ...Object.keys(lesson_data),
-        ...Object.keys(local)
-    ]);
+    fetch(API + "/lessons")
+    .then(function(r) { return r.json(); })
+    .then(function(apiLessons) {
+        var allNums = new Set([
+            ...Object.keys(lesson_data),
+            ...Object.keys(apiLessons)
+        ]);
 
-    container.innerHTML = "";
+        container.innerHTML = "";
 
-    allLessons.forEach(function(num) {
-        var merged     = getMergedLesson(num);
-        var wordCount  = Object.keys(merged.words).length;
-        var rpsCount   = Object.keys(merged.rps.roots).length + Object.keys(merged.rps.prefixes).length + Object.keys(merged.rps.suffixes).length;
-        var isLocal    = !lesson_data[num];
+        allNums.forEach(function(num) {
+            var baseWords = lesson_data[num] ? Object.keys(lesson_data[num].words).length : 0;
+            var apiWords  = apiLessons[num]  ? Object.keys(apiLessons[num].words || {}).length : 0;
+            var deleted   = apiLessons[num]  ? (apiLessons[num].deletedWords || []).length : 0;
+            var wordCount = baseWords + apiWords - deleted;
 
-        var row = document.createElement("div");
-        row.classList.add("manage-row");
+            var baseRPS = 0;
+            if (lesson_data[num] && lesson_data[num].rps) {
+                var r = lesson_data[num].rps;
+                baseRPS = Object.keys(r.roots||{}).length + Object.keys(r.prefixes||{}).length + Object.keys(r.suffixes||{}).length;
+            }
+            var apiRPS = 0;
+            if (apiLessons[num] && apiLessons[num].rps) {
+                var ar = apiLessons[num].rps;
+                apiRPS = Object.keys(ar.roots||{}).length + Object.keys(ar.prefixes||{}).length + Object.keys(ar.suffixes||{}).length;
+            }
+            var rpsCount = baseRPS + apiRPS;
 
-        row.innerHTML = `
-            <span class="manage-label">Lesson ${num} ${isLocal ? '<span class="local-badge">local</span>' : ''}</span>
-            <span class="manage-counts">${wordCount} word(s), ${rpsCount} RPS entry(s)</span>
-            ${isLocal ? `<button class="danger-btn small-btn" onclick="deleteLesson('${num}')">Delete Lesson</button>` : ""}
-        `;
+            var isLocal = !lesson_data[num];
 
-        container.appendChild(row);
+            var row = document.createElement("div");
+            row.classList.add("manage-row");
+            row.innerHTML = `
+                <span class="manage-label">Lesson ${num} ${isLocal ? '<span class="local-badge">local</span>' : ''}</span>
+                <span class="manage-counts">${wordCount} word(s), ${rpsCount} RPS entry(s)</span>
+                ${isLocal ? `<button class="danger-btn small-btn" onclick="deleteLesson('${num}')">Delete Lesson</button>` : ""}
+            `;
+            container.appendChild(row);
+        });
+
+        if (container.innerHTML === "") {
+            container.innerHTML = "<p style='color:#888;'>No lessons yet.</p>";
+        }
+    })
+    .catch(function() {
+        container.innerHTML = "<p style='color:#c62828;'>Could not connect to server. Is server.py running?</p>";
     });
 }
 
 function deleteLesson(lessonNum) {
-    if (!confirm("Delete all local data for lesson " + lessonNum + "? This cannot be undone.")) return;
+    if (!confirm("Delete all data for lesson " + lessonNum + "? This cannot be undone.")) return;
 
-    var local = getLocalLessons();
-    delete local[lessonNum];
-    saveLocalLessons(local);
-    renderManageLessons();
+    fetch(API + "/lessons/delete-lesson", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ lesson_num: lessonNum })
+    })
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        renderManageLessons();
+    })
+    .catch(function() { alert("Could not connect to server."); });
 }
 
 // ── Results ──
@@ -383,4 +363,3 @@ function clearResults() {
         renderTable();
     }
 }
-
