@@ -59,7 +59,7 @@ p {
 
 .allbutton {
     background-color: #ffffff;
-    color: rgb(53, 53, 53);
+    color: #e1e1e1;
     border: none;
     padding: 12px 24px;
     margin-top: 15px;
@@ -71,12 +71,12 @@ p {
 
 .lesson-button-wrapper.lightblue {
     background-color: #21349b;
-    border: 2px solid #4586ff;
+    border: 2px solid #e1e1e1;
 }
 
 .lesson-button-wrapper.blue {
     background-color: #21349b;
-    border: 2px solid #0059ff
+    border: 2px solid #e1e1e1
 }
 
 .lesson-button-wrapper.blue:hover {
