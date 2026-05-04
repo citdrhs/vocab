@@ -54,12 +54,12 @@ p {
     font-size: 1.2rem;
     box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
     text-decoration: none;
-    color: #333;
+    color: #e1e1e1;
 }
 
 .allbutton {
     background-color: #ffffff;
-    color: #e1e1e1;
+    color: rgb(53, 53, 53);
     border: none;
     padding: 12px 24px;
     margin-top: 15px;
