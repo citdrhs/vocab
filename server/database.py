@@ -118,3 +118,42 @@ def delete_lesson(lesson_num):
     conn.execute("DELETE FROM lessons WHERE lesson_num=?", (lesson_num,))
     conn.commit()
     conn.close()
+
+# ── Users ──
+def hash_password(password):
+    import hashlib
+    return hashlib.sha256(password.encode()).hexdigest()
+
+def register_user(username, password):
+    conn = get_db()
+    try:
+        conn.execute(
+            "INSERT INTO users (username, password, role) VALUES (?, ?, 'student')",
+            (username, hash_password(password))
+        )
+        conn.commit()
+        conn.close()
+        return True
+    except sqlite3.IntegrityError:
+        conn.close()
+        return False  # username already taken
+
+def get_user(username):
+    conn = get_db()
+    row = conn.execute("SELECT * FROM users WHERE username=?", (username,)).fetchone()
+    conn.close()
+    if row:
+        return { "username": row["username"], "password": row["password"], "role": row["role"] }
+    return None
+
+def get_all_users():
+    conn = get_db()
+    rows = conn.execute("SELECT username, role FROM users").fetchall()
+    conn.close()
+    return [{ "username": row["username"], "role": row["role"] } for row in rows]
+
+def delete_user(username):
+    conn = get_db()
+    conn.execute("DELETE FROM users WHERE username=?", (username,))
+    conn.commit()
+    conn.close()

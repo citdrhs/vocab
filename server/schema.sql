@@ -39,3 +39,11 @@ CREATE TABLE IF NOT EXISTS deleted_rps (
     term        TEXT NOT NULL,
     PRIMARY KEY (lesson_num, term)
 );
+
+-- Users table
+CREATE TABLE IF NOT EXISTS users (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    username    TEXT NOT NULL UNIQUE,
+    password    TEXT NOT NULL,  -- hashed password
+    role        TEXT NOT NULL DEFAULT 'student'  -- 'student' or 'admin'
+);
