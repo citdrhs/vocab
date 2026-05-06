@@ -203,7 +203,7 @@ button:hover {
 }
 
 .sub-tab-btn {
-    background: #e0e0e0;
+    background: #81A6C6;
     color: #333;
     border: none;
     padding: 8px 16px;
@@ -214,12 +214,12 @@ button:hover {
 }
 
 .sub-tab-btn:hover {
-    background: #bdbdbd;
+    background: #AACDDC;
     transform: none;
 }
 
 .sub-tab-btn.active {
-    background: #3f3f3f;
+    background: #81A6C6;
     color: white;
 }
 
@@ -347,12 +347,12 @@ button:hover {
 }
 
 .sub-tab-btn:hover {
-    background: #ddd;
+    background: #81A6C6;
     transform: none;
 }
 
 .sub-tab-btn.active {
-    background: #3f3f3f;
+    background: #81A6C6;
     color: white;
 }
 
@@ -420,11 +420,11 @@ button:hover {
 }
 
 .secondary-btn {
-    background: #757575 !important;
+    background: #AACDDC !important;
 }
 
 .secondary-btn:hover {
-    background: #555 !important;
+    background: #82bbd3 !important;
 }
 
 /* ── Manage Lessons ── */
