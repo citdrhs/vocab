@@ -1,30 +1,27 @@
 var lesson_data = { //all of the data for each of the lessons
     "1" : {
         "words" : {
-            "Licentious": {
+            "licentious": {
                 "ps" : "adjective",
                 "def" : "morally unrestrained",
                 "ex" : "Like St. Augustine, some people want to abandon thier styles, but not immediatly.",
                 "ant" :["Chaste", "Pure"], 
                 "syn" :["Immoral","Lewd"],
             },
-
-            "Numismatist":{
+            "numismatist":{
                 "ps" : "noun",
                 "def" : "a coin collector",
                 "ex" : "My father is a numismatist",
                 "ant" :["who whoem colection coins"], 
                 "syn" :["not a collecter of coins"],
             },
-
-            "Paucity":{
+            "paucity":{
                 "ps" : "noun",
                 "def" : "a scacity,lack",
                 "ex" : "The paucity of jobs in the small town forced jack to find work elsewhere",
                 "ant" :["abundance"], 
                 "syn" :["insufficiency"],
             },
-
             "fatalistic":{
                 "ps" : "adjective",
                 "def" : "believing that all events in life are inevitable and determined by fate",
@@ -32,7 +29,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" :["N/A"], 
                 "syn" :["N/A"],
             },
-
             "obtrude":{
                 "ps" : "verb",
                 "def" : "to force oneself into a situation uninvited.",
@@ -40,7 +36,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" :["extricate"], 
                 "syn" :["impose","intrude"],
             },
-
             "pensive":{
                 "ps" : "adjective",
                 "def" : "dreamily thoughtful",
@@ -48,7 +43,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" :["silly","frivolous"], 
                 "syn" :["reflective","meditative"],
             },
-
             "lackadasical":{
                 "ps" : "adjective",
                 "def" : "uninterested; listless",
@@ -56,7 +50,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" :["enyhusiastic","inspired"], 
                 "syn" :["spiritless","apathetic","languid"],
             },
-
             "alienate":{
                 "ps" : "verb",
                 "def" : "to turn away feelings or affections",
@@ -64,7 +57,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" :["endear","unite"], 
                 "syn" :["extrange","set against"],
             },
-
             "elated":{
                 "ps" : "adjective",
                 "def" : "in high spirits; exulatantlu proud and joyful",
@@ -72,7 +64,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" :["depressed"], 
                 "syn" :["overjoyed"],
             },
-
             "epigram":{
                 "ps" : "noun",
                 "def" : "a witty saying expressig a single thought or observation",
@@ -87,14 +78,13 @@ var lesson_data = { //all of the data for each of the lessons
     },
     "2" : {
         "words" : {
-            "deluge" : { //the word
-                "ps" : "noun", //part of speech
-                "def" : "a flood; an overwhelming rush", //defenition
-                "ex" : "The new amusement park experienced a ____ of visitors on opening day.", //example sentence, _ x4 is where the word goes
-                "ant" : ["drought", "dearth"], //antonyms
-                "syn" : ["inundation", "surge"] //synonyms
+            "deluge" : {
+                "ps" : "noun",
+                "def" : "a flood; an overwhelming rush",
+                "ex" : "The new amusement park experienced a ____ of visitors on opening day.",
+                "ant" : ["drought", "dearth"],
+                "syn" : ["inundation", "surge"]
             },
-
             "catholic" : {
                 "ps" : "adjective",
                 "def" : "universal; wide-ranging",
@@ -102,7 +92,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["provincial", "limited", "parochial"],
                 "syn" : ["broad"]
             },
-
             "eerie" : {
                 "ps" : "adjective",
                 "def" : "weird; mysterious; strange and frightening",
@@ -110,7 +99,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["common", "ordinary"],
                 "syn" : ["creepy", "sinister"]
             },
-
             "martial" : {
                 "ps" : "adjective",
                 "def" : "warlike; relating to the military",
@@ -118,7 +106,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : []
             },
-
             "anthropomorphic" : {
                 "ps" : "adjective",
                 "def" : "attributing human characteristics or qualities to objects, animals, or gods",
@@ -126,7 +113,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : []
             },
-
             "beneficiary" : {
                 "ps" : "noun",
                 "def" : "one who receives benefits",
@@ -134,7 +120,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : ["recipient", "heir"]
             },
-
             "careen" : {
                 "ps" : "verb",
                 "def" : "to swerve or lurch from side to side while in motion",
@@ -142,7 +127,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : ["tilt"]
             },
-
             "aplomb" : {
                 "ps" : "noun",
                 "def" : "self-confidence",
@@ -150,7 +134,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["awkwardness"],
                 "syn" : ["assurance", "poise"]
             },
-
             "guile" : {
                 "ps" : "noun",
                 "def" : "slyness and cunning in dealing with others",
@@ -158,7 +141,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["honesty"],
                 "syn" : ["craftiness", "astuteness"]
             },
-
             "modicum" : {
                 "ps" : "noun",
                 "def" : "a small amount",
@@ -166,7 +148,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["abundance"],
                 "syn" : ["bit"]
             },
-
             "rancid" : {
                 "ps" : "adjective",
                 "def" : "having a bad taste ",
@@ -174,7 +155,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["fresh"],
                 "syn" : ["rotten", "repulsive"]
             },
-
             "havoc" : {
                 "ps" : "noun",
                 "def" : "great destruction; chaos",
@@ -182,7 +162,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["order"],
                 "syn" : ["mayhem", "disorder"]
             },
-
             "pall" : {
                 "ps" : "noun",
                 "def" : "something that covers or conceals",
@@ -190,7 +169,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : ["shroud"]
             },
-
             "languish" : {
                 "ps" : "verb",
                 "def" : "to become weak or feeble; to lose strength",
@@ -198,7 +176,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["thrive"],
                 "syn" : ["wither", "fade"]
             },
-
             "fester" : {
                 "ps" : "verb",
                 "def" : "to grow embittered over time; to rot",
@@ -210,14 +187,13 @@ var lesson_data = { //all of the data for each of the lessons
     },
     "3" : {
         "words" : {
-            "edifice" : { //the word
-            "ps" : "noun", //part of speech
-            "def" : "a large, elaborate structure; and imposing building", //defenition
-            "ex" : "The palace was not just a home; it was an edifice that created envy among foreign rulers", //example sentence, _ x4 is where the word goes
-            "ant" : ["hovel"], //antonyms
-            "syn" : ["fortress"] //synonyms
+            "edifice" : {
+            "ps" : "noun",
+            "def" : "a large, elaborate structure; and imposing building",
+            "ex" : "The palace was not just a home; it was an edifice that created envy among foreign rulers",
+            "ant" : ["hovel"],
+            "syn" : ["fortress"]
             },
-
             "ambidextrous" : {
                 "ps" : "adjective",
                 "def" : "equely skillful with either hand",
@@ -225,7 +201,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : []
             },
-
             "belated" : {
                 "ps" : "adjective",
                 "def" : "delayed",
@@ -233,7 +208,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["timely"],
                 "syn" : ["tardy","late"]
             },
-
             "animate" : {
                 "ps" : "verb",
                 "def" : "to give life or motion to",
@@ -248,7 +222,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : ["squeeze","rub","press"]
             },
-
             "chauvinist" : {
                 "ps" : "noun",
                 "def" : "one having a fanatical devotion to a country, gender, or religion with contempt for other countries, the opposite sex, or other beliefs",
@@ -256,7 +229,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : []
             },
-
             "egalitarian" : {
                 "ps" : "adjective",
                 "def" : "promoting equel rights for all people",
@@ -264,7 +236,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["elitist"],
                 "syn" : []
             },
-
             "berserk" : {
                 "ps" : "adjective",
                 "def" : "in a state of violent or destructive rage",
@@ -272,7 +243,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["placid","complacent"],
                 "syn" : ["frenzied"]
             },
-
             "ostentatious" : {
                 "ps" : "adjective",
                 "def" : "marked by a conspicuous, shaowy, or pretentious display",
@@ -280,10 +250,9 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["unobtrusive","bland"],
                 "syn" : ["grandiose"]
             },
-
             "delude" : {
                 "ps" : "verb",
-                "def" : "to mislead;fool",
+                "def" : "to mislead; fool",
                 "ex" : "the fast-talking salesman could not delude us into buying the dilapidated truck",
                 "ant" : ["enlighten"],
                 "syn" : ["deceive"]
@@ -292,9 +261,9 @@ var lesson_data = { //all of the data for each of the lessons
         "rps" : {
             "roots" : {
                 "mater" : "mother",
-                "micro":"small",
-                "meter":"measure",
-                "aut":"self"
+                "micro" : "small",
+                "meter" : "measure",
+                "aut" : "self"
             },
 
             "prefixes" : {},
@@ -315,7 +284,6 @@ var lesson_data = { //all of the data for each of the lessons
             "ant" : ["attract"],
             "syn" : ["avoid","evade","lose"]
             },
-
             "fallow" : {
                 "ps" : "adjective",
                 "def" : "inactive unproductive",
@@ -387,8 +355,8 @@ var lesson_data = { //all of the data for each of the lessons
             },
 
             "prefixes" : {
-                "mono":"one",
-                "poly":"many"
+                "mono" : "one",
+                "poly" : "many"
             },
 
             "suffixes" : {},
@@ -407,7 +375,6 @@ var lesson_data = { //all of the data for each of the lessons
             "ant" : ["fresh"],
             "syn" : ["exhausted","wearied"]
             },
-
             "gist" : {
                 "ps" : "noun",
                 "def" : "the main point",
@@ -471,7 +438,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["righteous"],
                 "syn" : ["dishonorable","shameful"]
             },
-        
         },
         "rps" : {
             "roots" : {
@@ -481,7 +447,7 @@ var lesson_data = { //all of the data for each of the lessons
             },
 
             "prefixes" : {
-                "mono":"one"
+                "mono" : "one"
             },
 
             "suffixes" : {},
@@ -490,7 +456,6 @@ var lesson_data = { //all of the data for each of the lessons
 
             "sentences" : {}
         }
-        
     },
     "6" : {
         "words" : {
@@ -568,11 +533,11 @@ var lesson_data = { //all of the data for each of the lessons
         "rps" : {
             "roots" : {
                 "mort" : "death",
-                "voc and vok" :"call",
+                "voc and vok" : "call",
             },
 
             "prefixes" : {
-                "biblio":"book"
+                "biblio" : "book"
             },
 
             "suffixes" : {},
@@ -1137,16 +1102,15 @@ var lesson_data = { //all of the data for each of the lessons
             "sentences" : {}
         }
     },
-    "12" : { //lesson #
-        "words" : { //all of the words
-            "deluge" : { //the word
-                "ps" : "noun", //part of speech
-                "def" : "a flood; an overwhelming rush", //defenition
-                "ex" : "The new amusement park experienced a ____ of visitors on opening day.", //example sentence, _ x4 is where the word goes
-                "ant" : ["drought", "dearth"], //antonyms
-                "syn" : ["inundation", "surge"] //synonyms
+    "12" : {
+        "words" : {
+            "deluge" : {
+                "ps" : "noun",
+                "def" : "a flood; an overwhelming rush",
+                "ex" : "The new amusement park experienced a ____ of visitors on opening day.",
+                "ant" : ["drought", "dearth"],
+                "syn" : ["inundation", "surge"]
             },
-
             "catholic" : {
                 "ps" : "adjective",
                 "def" : "universal; wide-ranging",
@@ -1154,7 +1118,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["provincial", "limited", "parochial"],
                 "syn" : ["broad"]
             },
-
             "eerie" : {
                 "ps" : "adjective",
                 "def" : "weird; mysterious; strange and frightening",
@@ -1162,7 +1125,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["common", "ordinary"],
                 "syn" : ["creepy", "sinister"]
             },
-
             "martial" : {
                 "ps" : "adjective",
                 "def" : "warlike; relating to the military",
@@ -1170,7 +1132,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : []
             },
-
             "anthropomorphic" : {
                 "ps" : "adjective",
                 "def" : "attributing human characteristics or qualities to objects, animals, or gods",
@@ -1178,7 +1139,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : []
             },
-
             "beneficiary" : {
                 "ps" : "noun",
                 "def" : "one who receives benefits",
@@ -1186,7 +1146,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : ["recipient", "heir"]
             },
-
             "careen" : {
                 "ps" : "verb",
                 "def" : "to swerve or lurch from side to side while in motion",
@@ -1194,7 +1153,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : ["tilt"]
             },
-
             "aplomb" : {
                 "ps" : "noun",
                 "def" : "self-confidence",
@@ -1202,7 +1160,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["awkwardness"],
                 "syn" : ["assurance", "poise"]
             },
-
             "guile" : {
                 "ps" : "noun",
                 "def" : "slyness and cunning in dealing with others",
@@ -1210,7 +1167,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["honesty"],
                 "syn" : ["craftiness", "astuteness"]
             },
-
             "modicum" : {
                 "ps" : "noun",
                 "def" : "a small amount",
@@ -1218,7 +1174,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["abundance"],
                 "syn" : ["bit"]
             },
-
             "rancid" : {
                 "ps" : "adjective",
                 "def" : "having a bad taste ",
@@ -1226,7 +1181,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["fresh"],
                 "syn" : ["rotten", "repulsive"]
             },
-
             "havoc" : {
                 "ps" : "noun",
                 "def" : "great destruction; chaos",
@@ -1234,7 +1188,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["order"],
                 "syn" : ["mayhem", "disorder"]
             },
-
             "pall" : {
                 "ps" : "noun",
                 "def" : "something that covers or conceals",
@@ -1242,7 +1195,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : [],
                 "syn" : ["shroud"]
             },
-
             "languish" : {
                 "ps" : "verb",
                 "def" : "to become weak or feeble; to lose strength",
@@ -1250,7 +1202,6 @@ var lesson_data = { //all of the data for each of the lessons
                 "ant" : ["thrive"],
                 "syn" : ["wither", "fade"]
             },
-
             "fester" : {
                 "ps" : "verb",
                 "def" : "to grow embittered over time; to rot",
