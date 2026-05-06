@@ -18,7 +18,7 @@ body {
 
 .sidebar {
     width: 200px;
-    background: #2c2c2c;
+    background: #2C74B3;
     display: flex;
     flex-direction: column;
     padding: 20px 0;
@@ -49,20 +49,20 @@ body {
 }
 
 .tab-btn:hover {
-    background: #3f3f3f;
+    background: #144272;
     color: white;
     transform: none;
 }
 
 .tab-btn.active {
-    background: #3f3f3f;
+    background: #144272;
     color: white;
-    border-left: 3px solid #45a049;
+    border-left: 3px solid #81A6C6;
 }
 
 .return-btn {
     margin-top: auto;
-    color: #aaa;
+    color: #ffffff;
 }
 
 .main {
@@ -154,7 +154,7 @@ tbody tr:hover { background: #f9f9f9; }
 
 /* ── Buttons ── */
 button {
-    background-color: #3f3f3f;
+    background-color: #81A6C6;
     color: white;
     border: none;
     padding: 10px 20px;
@@ -187,11 +187,11 @@ button:hover {
 }
 
 .secondary-btn {
-    background: #555;
+    background: #81A6C6;
 }
 
 .secondary-btn:hover {
-    background: #777;
+    background: #70abde;
 }
 
 /* ── Sub Tabs ── */
