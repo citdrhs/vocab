@@ -17,7 +17,7 @@ var lesson_data = { //all of the data for each of the lessons
             },
             "paucity":{
                 "ps" : "noun",
-                "def" : "a scacity,lack",
+                "def" : "a scarcity, lack",
                 "ex" : "The paucity of jobs in the small town forced jack to find work elsewhere",
                 "ant" :["abundance"], 
                 "syn" :["insufficiency"],
@@ -31,7 +31,7 @@ var lesson_data = { //all of the data for each of the lessons
             },
             "obtrude":{
                 "ps" : "verb",
-                "def" : "to force oneself into a situation uninvited.",
+                "def" : "to force oneself into a situation uninvited",
                 "ex" : "you were concentrating intently at the workon yur desk, so I did not wish to obtrude",
                 "ant" :["extricate"], 
                 "syn" :["impose","intrude"],
