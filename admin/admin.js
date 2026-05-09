@@ -1,7 +1,7 @@
 var allResults = [];
 var sortKey = "date";
 var sortAsc = false;
-var API = "http://localhost:5000/api";
+var API = "/api";
 
 //  Onload 
 function admin_onload() {
@@ -36,7 +36,7 @@ function showSubTab(name) {
     if (name === "manage") { renderManageLessons(); }
 }
 
-// ── Add / Edit Word ──
+//  Add / Edit Word 
 function saveWord() {
     var lessonNum = document.getElementById("aw-lesson").value.trim();
     var word      = document.getElementById("aw-word").value.trim().toLowerCase();
@@ -107,7 +107,7 @@ function loadWordForEdit() {
     .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
-// ── Add / Edit RPS ──
+//  Add / Edit RPS 
 function saveRPS() {
     var lessonNum = document.getElementById("rps-lesson").value.trim();
     var type_     = document.getElementById("rps-type").value;
@@ -137,7 +137,7 @@ function saveRPS() {
     .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
-// ── Delete ──
+//  Delete 
 function populateDeleteOptions() {
     var lessonNum = document.getElementById("del-lesson").value.trim();
     var type_     = document.getElementById("del-type").value;
@@ -224,7 +224,7 @@ function deleteEntry() {
     .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
-// ── Manage Lessons ──
+//  Manage Lessons 
 function renderManageLessons() {
     var container = document.getElementById("manage-lessons-list");
     if (!container) return;
@@ -293,14 +293,22 @@ function deleteLesson(lessonNum) {
     .catch(function() { alert("Could not connect to server."); });
 }
 
-// ── Results ──
+//  Results 
 function loadResults() {
-    allResults = JSON.parse(localStorage.getItem("quiz_results") || "[]");
+    fetch(API + "/results")
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+        allResults = data;
+        renderTable();
+    })
+    .catch(function() {
+        // Fallback to localStorage
+        allResults = JSON.parse(localStorage.getItem("quiz_results") || "[]");
+        renderTable();
+    });
 }
 
 function renderTable() {
-    loadResults();
-
     var nameFilter   = document.getElementById("filter-name").value.trim().toLowerCase();
     var testFilter   = document.getElementById("filter-test").value;
     var lessonFilter = document.getElementById("filter-lesson").value.trim();
@@ -362,7 +370,11 @@ function sortBy(key) {
 
 function clearResults() {
     if (confirm("Are you sure you want to delete ALL results? This cannot be undone.")) {
-        localStorage.removeItem("quiz_results");
-        renderTable();
+        fetch(API + "/results/clear", { method: "POST" })
+        .then(function() { loadResults(); })
+        .catch(function() {
+            localStorage.removeItem("quiz_results");
+            loadResults();
+        });
     }
 }

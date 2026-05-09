@@ -1,4 +1,4 @@
-var API = "http://localhost:5000/api";
+var API = "/api";
 
 function login_onload() {
     // If already logged in, redirect appropriately

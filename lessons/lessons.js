@@ -3,7 +3,7 @@ var current_lessons = []
 var wordcontainer = document.getElementById("word-container");
 var rpscontainer  = document.getElementById("rps-container");
 
-var API = "http://localhost:5000/api";
+var API = "/api";
 
 // ── Merge API lesson data into lesson_data ──
 function mergeLocalData(callback) {

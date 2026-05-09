@@ -1,5 +1,5 @@
 // mergedata.js — fetches lesson data from the API and merges into lesson_data
-var API = "http://localhost:5000/api";
+var API = "/api";
 
 function mergeLocalData(callback) {
     fetch(API + "/lessons")

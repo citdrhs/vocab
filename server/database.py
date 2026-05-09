@@ -157,3 +157,34 @@ def delete_user(username):
     conn.execute("DELETE FROM users WHERE username=?", (username,))
     conn.commit()
     conn.close()
+
+#  Results 
+def save_result(name, class_num, test_type, lessons, score, total, date):
+    conn = get_db()
+    conn.execute("""
+        INSERT INTO results (name, class_num, test_type, lessons, score, total, date)
+        VALUES (?, ?, ?, ?, ?, ?, ?)
+    """, (name, class_num, test_type, ",".join(lessons), score, total, date))
+    conn.commit()
+    conn.close()
+
+def get_all_results():
+    conn = get_db()
+    rows = conn.execute("SELECT * FROM results ORDER BY id DESC").fetchall()
+    conn.close()
+    return [{
+        "id":       row["id"],
+        "name":     row["name"],
+        "class":    row["class_num"],
+        "testType": row["test_type"],
+        "lessons":  row["lessons"].split(","),
+        "score":    row["score"],
+        "total":    row["total"],
+        "date":     row["date"]
+    } for row in rows]
+
+def clear_all_results():
+    conn = get_db()
+    conn.execute("DELETE FROM results")
+    conn.commit()
+    conn.close()

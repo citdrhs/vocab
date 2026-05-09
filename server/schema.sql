@@ -48,3 +48,15 @@ CREATE TABLE IF NOT EXISTS users (
     role        TEXT NOT NULL DEFAULT 'student',
     class_num   TEXT NOT NULL DEFAULT ''
 );
+
+-- Results table
+CREATE TABLE IF NOT EXISTS results (
+    id          INTEGER PRIMARY KEY AUTOINCREMENT,
+    name        TEXT NOT NULL,
+    class_num   TEXT NOT NULL DEFAULT '',
+    test_type   TEXT NOT NULL,
+    lessons     TEXT NOT NULL,  -- stored as comma-separated string
+    score       INTEGER NOT NULL,
+    total       INTEGER NOT NULL,
+    date        TEXT NOT NULL
+);
