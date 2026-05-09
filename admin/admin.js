@@ -3,7 +3,7 @@ var sortKey = "date";
 var sortAsc = false;
 var API = "http://localhost:5000/api";
 
-// ── Onload ──
+//  Onload 
 function admin_onload() {
     if (sessionStorage.getItem("logged_in") !== "true" || sessionStorage.getItem("role") !== "admin") {
         window.location.href = "../login/login.html";
@@ -19,7 +19,7 @@ function adminLogout() {
     window.location.href = "../login/login.html";
 }
 
-// ── Tabs ──
+//  Tabs 
 function showTab(tabName) {
     document.querySelectorAll(".tab-content").forEach(function(el) { el.style.display = "none"; });
     document.querySelectorAll(".tab-btn").forEach(function(btn) { btn.classList.remove("active"); });
@@ -304,12 +304,14 @@ function renderTable() {
     var nameFilter   = document.getElementById("filter-name").value.trim().toLowerCase();
     var testFilter   = document.getElementById("filter-test").value;
     var lessonFilter = document.getElementById("filter-lesson").value.trim();
+    var classFilter  = document.getElementById("filter-class").value.trim();
 
     var filtered = allResults.filter(function(r) {
         var nameMatch   = !nameFilter   || r.name.toLowerCase().includes(nameFilter);
         var testMatch   = !testFilter   || r.testType === testFilter;
         var lessonMatch = !lessonFilter || r.lessons.join(", ").includes(lessonFilter);
-        return nameMatch && testMatch && lessonMatch;
+        var classMatch  = !classFilter  || (r.class || "").includes(classFilter);
+        return nameMatch && testMatch && lessonMatch && classMatch;
     });
 
     filtered.sort(function(a, b) {
@@ -336,6 +338,7 @@ function renderTable() {
             var scoreClass = pct >= 0.8 ? "score-high" : pct >= 0.5 ? "score-mid" : "score-low";
             tr.innerHTML = `
                 <td>${r.name}</td>
+                <td>${r.class || ""}</td>
                 <td>${r.testType}</td>
                 <td>Lesson ${r.lessons.join(", ")}</td>
                 <td class="score-cell ${scoreClass}">${r.score} / ${r.total} (${Math.round(pct * 100)}%)</td>

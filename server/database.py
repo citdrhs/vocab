@@ -17,7 +17,7 @@ def init_db():
     conn.close()
     print("Database initialized.")
 
-# ── Words ──
+#  Words 
 def add_or_update_word(lesson_num, word, ps, def_, ex, syn, ant):
     conn = get_db()
     syn_str = ",".join(syn) if syn else ""
@@ -66,7 +66,7 @@ def get_deleted_words(lesson_num):
     conn.close()
     return [row["word"] for row in rows]
 
-# ── RPS ──
+#  RPS 
 def add_or_update_rps(lesson_num, type_, term, meaning):
     conn = get_db()
     conn.execute("""
@@ -102,7 +102,7 @@ def get_deleted_rps(lesson_num):
     conn.close()
     return [row["term"] for row in rows]
 
-# ── Lessons ──
+#  Lessons 
 def get_all_lessons():
     conn = get_db()
     rows = conn.execute("SELECT lesson_num FROM lessons").fetchall()
@@ -119,17 +119,17 @@ def delete_lesson(lesson_num):
     conn.commit()
     conn.close()
 
-# ── Users ──
+#  Users 
 def hash_password(password):
     import hashlib
     return hashlib.sha256(password.encode()).hexdigest()
 
-def register_user(username, password):
+def register_user(username, password, class_num):
     conn = get_db()
     try:
         conn.execute(
-            "INSERT INTO users (username, password, role) VALUES (?, ?, 'student')",
-            (username, hash_password(password))
+            "INSERT INTO users (username, password, role, class_num) VALUES (?, ?, 'student', ?)",
+            (username, hash_password(password), class_num)
         )
         conn.commit()
         conn.close()
@@ -143,14 +143,14 @@ def get_user(username):
     row = conn.execute("SELECT * FROM users WHERE username=?", (username,)).fetchone()
     conn.close()
     if row:
-        return { "username": row["username"], "password": row["password"], "role": row["role"] }
+        return { "username": row["username"], "password": row["password"], "role": row["role"], "class_num": row["class_num"] }
     return None
 
 def get_all_users():
     conn = get_db()
-    rows = conn.execute("SELECT username, role FROM users").fetchall()
+    rows = conn.execute("SELECT username, role, class_num FROM users").fetchall()
     conn.close()
-    return [{ "username": row["username"], "role": row["role"] } for row in rows]
+    return [{ "username": row["username"], "role": row["role"], "class_num": row["class_num"] } for row in rows]
 
 def delete_user(username):
     conn = get_db()

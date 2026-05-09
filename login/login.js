@@ -68,6 +68,7 @@ function attemptLogin() {
         sessionStorage.setItem("logged_in", "true");
         sessionStorage.setItem("role", data.role);
         sessionStorage.setItem("student_name", data.username);
+        sessionStorage.setItem("class_num", data.class_num || "");
 
         if (data.role === "admin") {
             window.location.href = "../admin/admin.html";
@@ -84,13 +85,14 @@ function attemptRegister() {
     var username  = document.getElementById("reg-username").value.trim();
     var password  = document.getElementById("reg-password").value;
     var confirm   = document.getElementById("reg-confirm").value;
+    var classNum  = document.getElementById("reg-class").value.trim();
     var errorEl   = document.getElementById("reg-error");
     var successEl = document.getElementById("reg-success");
 
     errorEl.textContent   = "";
     successEl.textContent = "";
 
-    if (!username || !password || !confirm) {
+    if (!username || !password || !confirm || !classNum) {
         errorEl.textContent = "Please fill in all fields.";
         return;
     }
@@ -103,7 +105,7 @@ function attemptRegister() {
     fetch(API + "/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username: username, password: password })
+        body: JSON.stringify({ username: username, password: password, class_num: classNum })
     })
     .then(function(r) { return r.json(); })
     .then(function(data) {
@@ -116,6 +118,7 @@ function attemptRegister() {
         document.getElementById("reg-username").value = "";
         document.getElementById("reg-password").value = "";
         document.getElementById("reg-confirm").value  = "";
+        document.getElementById("reg-class").value    = "";
 
         setTimeout(showLogin, 1500);
     })

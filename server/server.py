@@ -8,7 +8,7 @@ CORS(app)  # Allow requests from Live Server (localhost:5501)
 # Initialize the database on startup
 db.init_db()
 
-#  Get all lesson data 
+# ── Get all lesson data ──
 @app.route("/api/lessons", methods=["GET"])
 def get_lessons():
     lesson_nums = db.get_all_lessons()
@@ -29,7 +29,7 @@ def get_lessons():
 
     return jsonify(result)
 
-#  Add or edit a word 
+# ── Add or edit a word ──
 @app.route("/api/lessons/add-word", methods=["POST"])
 def add_word():
     data       = request.json
@@ -47,7 +47,7 @@ def add_word():
     db.add_or_update_word(lesson_num, word, ps, def_, ex, syn, ant)
     return jsonify({"success": True, "message": f'Word "{word}" saved to lesson {lesson_num}.'})
 
-#  Delete a word 
+# ── Delete a word ──
 @app.route("/api/lessons/delete-word", methods=["POST"])
 def delete_word():
     data       = request.json
@@ -60,7 +60,7 @@ def delete_word():
     db.delete_word(lesson_num, word)
     return jsonify({"success": True, "message": f'Word "{word}" deleted from lesson {lesson_num}.'})
 
-#  Add or edit an RPS entry 
+# ── Add or edit an RPS entry ──
 @app.route("/api/lessons/add-rps", methods=["POST"])
 def add_rps():
     data       = request.json
@@ -78,7 +78,7 @@ def add_rps():
     db.add_or_update_rps(lesson_num, type_, term, meaning)
     return jsonify({"success": True, "message": f'"{term}" saved as {type_[:-1]} in lesson {lesson_num}.'})
 
-#  Delete an RPS entry 
+# ── Delete an RPS entry ──
 @app.route("/api/lessons/delete-rps", methods=["POST"])
 def delete_rps():
     data       = request.json
@@ -91,7 +91,7 @@ def delete_rps():
     db.delete_rps(lesson_num, term)
     return jsonify({"success": True, "message": f'"{term}" deleted from lesson {lesson_num}.'})
 
-#  Delete an entire lesson 
+# ── Delete an entire lesson ──
 @app.route("/api/lessons/delete-lesson", methods=["POST"])
 def delete_lesson():
     data       = request.json
@@ -103,7 +103,7 @@ def delete_lesson():
     db.delete_lesson(lesson_num)
     return jsonify({"success": True, "message": f'Lesson {lesson_num} deleted.'})
 
-#  Get a single lesson 
+# ── Get a single lesson ──
 @app.route("/api/lessons/<lesson_num>", methods=["GET"])
 def get_lesson(lesson_num):
     words         = db.get_words(lesson_num)
@@ -118,15 +118,19 @@ def get_lesson(lesson_num):
         "deletedRPS":   deleted_rps
     })
 
-#  Register 
+# ── Register ──
 @app.route("/api/register", methods=["POST"])
 def register():
-    data     = request.json
-    username = data.get("username", "").strip()
-    password = data.get("password", "")
+    data      = request.json
+    username  = data.get("username", "").strip()
+    password  = data.get("password", "")
+    class_num = data.get("class_num", "").strip()
 
     if not username or not password:
         return jsonify({"error": "Username and password are required."}), 400
+
+    if not class_num:
+        return jsonify({"error": "Class number is required."}), 400
 
     if username.lower() == "admin":
         return jsonify({"error": "That username is not allowed."}), 400
@@ -137,13 +141,13 @@ def register():
     if len(password) < 6:
         return jsonify({"error": "Password must be at least 6 characters."}), 400
 
-    success = db.register_user(username, password)
+    success = db.register_user(username, password, class_num)
     if not success:
         return jsonify({"error": "Username already taken."}), 409
 
     return jsonify({"success": True, "message": "Account created! You can now log in."})
 
-# Login 
+# ── Login ──
 @app.route("/api/login", methods=["POST"])
 def login():
     data     = request.json
@@ -153,9 +157,8 @@ def login():
     if not username or not password:
         return jsonify({"error": "Username and password are required."}), 400
 
-    # Check admin (hardcoded)
     if username == "admin" and password == "admin123":
-        return jsonify({"success": True, "username": "admin", "role": "admin"})
+        return jsonify({"success": True, "username": "admin", "role": "admin", "class_num": ""})
 
     user = db.get_user(username)
 
@@ -165,14 +168,14 @@ def login():
     if user["password"] != db.hash_password(password):
         return jsonify({"error": "Incorrect password."}), 401
 
-    return jsonify({"success": True, "username": user["username"], "role": user["role"]})
+    return jsonify({"success": True, "username": user["username"], "role": user["role"], "class_num": user["class_num"]})
 
-#  Get all users (admin only) 
+# ── Get all users (admin only) ──
 @app.route("/api/users", methods=["GET"])
 def get_users():
     return jsonify(db.get_all_users())
 
-#  Delete a user (admin only) 
+# ── Delete a user (admin only) ──
 @app.route("/api/users/delete", methods=["POST"])
 def delete_user():
     data     = request.json

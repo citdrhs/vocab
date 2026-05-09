@@ -36,12 +36,14 @@
                         <option value="RPS Test">RPS Test</option>
                     </select>
                     <input type="text" id="filter-lesson" placeholder="Filter by lesson..." oninput="renderTable()" />
+                    <input type="text" id="filter-class" placeholder="Filter by class..." oninput="renderTable()" />
                 </div>
                 <div class="table-wrapper">
                     <table id="results-table">
                         <thead>
                             <tr>
                                 <th onclick="sortBy('name')">Name ↕</th>
+                                <th onclick="sortBy('class')">Class ↕</th>
                                 <th onclick="sortBy('testType')">Test Type ↕</th>
                                 <th onclick="sortBy('lessons')">Lesson(s) ↕</th>
                                 <th onclick="sortBy('score')">Score ↕</th>
@@ -157,7 +159,7 @@
                         <div class="form-row">
                             <label>Entry</label>
                             <select id="del-entry">
-                                <option value="">-- enter a lesson number first --</option>
+                                <option value="">-- enter lesson number first --</option>
                             </select>
                         </div>
                     </div>
@@ -169,7 +171,7 @@
                 <!-- Manage Lessons -->
                 <div id="subtab-manage" class="sub-tab-content" style="display:none;">
                     <h3>Manage Lessons</h3>
-                    <p style="color:#666; margin-bottom:16px;">Only locally added lessons may be deleted.</p>
+                    <p style="color:#666; margin-bottom:16px;">Locally added lessons can be deleted. Lessons from lessondata.js cannot.</p>
                     <div id="manage-lessons-list"></div>
                 </div>
 
@@ -177,6 +179,7 @@
 
         </div>
     </div>
+
     <script src="../lessondata.js"></script>
     <script src="admin.js"></script>
 </body>
