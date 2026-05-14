@@ -12,62 +12,62 @@ var lesson_data = { //all of the data for each of the lessons
                 "ps" : "noun",
                 "def" : "a coin collector",
                 "ex" : "My father is a numismatist",
-                "ant" :["who whoem colection coins"], 
-                "syn" :["not a collecter of coins"],
+                "ant" :[], 
+                "syn" :[],
             },
             "paucity":{
                 "ps" : "noun",
                 "def" : "a scarcity, lack",
-                "ex" : "The paucity of jobs in the small town forced jack to find work elsewhere",
+                "ex" : "The paucity of jobs in the small town forced Jack to find work elsewhere",
                 "ant" :["abundance"], 
                 "syn" :["insufficiency"],
             },
             "fatalistic":{
                 "ps" : "adjective",
                 "def" : "believing that all events in life are inevitable and determined by fate",
-                "ex" : "Fatalistic thinkers believe that there is nothing they can do to change the course of their lives",
-                "ant" :["N/A"], 
-                "syn" :["N/A"],
+                "ex" : "Fatalistic thinkers believe that there is nothing they can do to change the course of their lives.",
+                "ant" :[], 
+                "syn" :[],
             },
             "obtrude":{
                 "ps" : "verb",
                 "def" : "to force oneself into a situation uninvited",
-                "ex" : "you were concentrating intently at the workon yur desk, so I did not wish to obtrude",
+                "ex" : "You were concentrating intently at the work on your desk, so I did not wish to obtrude.",
                 "ant" :["extricate"], 
                 "syn" :["impose","intrude"],
             },
             "pensive":{
                 "ps" : "adjective",
                 "def" : "dreamily thoughtful",
-                "ex" : "Jane was in a pensive mood after she finished reading the thought-provoking novel",
+                "ex" : "Jane was in a pensive mood after she finished reading the thought-pro- voking novel",
                 "ant" :["silly","frivolous"], 
                 "syn" :["reflective","meditative"],
             },
             "lackadasical":{
                 "ps" : "adjective",
                 "def" : "uninterested; listless",
-                "ex" : "The lackadaisical student sat in the detention hall and stared out the window",
-                "ant" :["enyhusiastic","inspired"], 
+                "ex" : "The lackadaisical student sat in the detention hall and stared out the window.",
+                "ant" :[" enyhusiastic", "inspired"], 
                 "syn" :["spiritless","apathetic","languid"],
             },
             "alienate":{
                 "ps" : "verb",
                 "def" : "to turn away feelings or affections",
-                "ex" : "Your sarcastic remarks might alienate your friends and family",
+                "ex" : "Your sarcastic remarks might alienate your friends and family.",
                 "ant" :["endear","unite"], 
                 "syn" :["extrange","set against"],
             },
             "elated":{
                 "ps" : "adjective",
                 "def" : "in high spirits; exulatantlu proud and joyful",
-                "ex" : "we were elated to learn that our team would move on to finals",
+                "ex" : "We were elated to learn that our team would move on to finals",
                 "ant" :["depressed"], 
                 "syn" :["overjoyed"],
             },
             "epigram":{
                 "ps" : "noun",
                 "def" : "a witty saying expressig a single thought or observation",
-                "ex" : "the author placed relevent epigrams at the begining of each chapter.",
+                "ex" : "The author placed relevant epigrams at the beginning of each chapter.",
                 "ant" :[], 
                 "syn" :["aphorism","bon mot", "quip"],
             }
@@ -78,21 +78,21 @@ var lesson_data = { //all of the data for each of the lessons
     },
     "2" : {
         "words" : {
-            "deluge" : {
-                "ps" : "noun",
-                "def" : "a flood; an overwhelming rush",
-                "ex" : "The new amusement park experienced a ____ of visitors on opening day.",
-                "ant" : ["drought", "dearth"],
-                "syn" : ["inundation", "surge"]
+            "amalgamate" : {
+                "ps" : "verb",
+                "def" : "to combine",
+                "ex" : "The great leader amalgamated many small tribes into his own to make a singular, powerful nation.",
+                "ant" : ["splinter", "disunite"],
+                "syn" : ["unite", "blend","merge","consolidate"]
             },
-            "catholic" : {
+            "demented" : {
                 "ps" : "adjective",
-                "def" : "universal; wide-ranging",
-                "ex" : "His ____ interests made him quite knowledgeable in may subjects",
-                "ant" : ["provincial", "limited", "parochial"],
-                "syn" : ["broad"]
+                "def" : "Mentally ill; insane",
+                "ex" : "Mary's demented cat attacks anything that makes a noise, including the television.",
+                "ant" : ["deranged", "insane", ],
+                "syn" : [""]
             },
-            "eerie" : {
+            "hone" : {
                 "ps" : "adjective",
                 "def" : "weird; mysterious; strange and frightening",
                 "ex" : "No one accepted the dare to stay in the ____ old mansion for one night.",
@@ -461,71 +461,71 @@ var lesson_data = { //all of the data for each of the lessons
         "words" : {
             "nepotism" : {
                 "ps" : "noun",
-                "def" : "favoritism shown to family or friends by thoes in power, especially in business or hiring practices",
-                "ex" : "i was qualified for the job, but uncle mike refused to hire me because he did not want to be accused of nepotism",
+                "def" : "favoritism shown to family or friends by those in power, especially in business or hiring practices",
+                "ex" : "I was qualified for the job, but Uncle Mike refused to hire me because he did not want to be accused of nepotism.",
                 "ant" : [],
                 "syn" : []
             },
             "begrude" : {
                 "ps" : "verb",
-                "def" : "to resent another's success;to envy",
-                "ex" : "craig, the younger brother, secretly begrudged brain's fortune",
+                "def" : "to resent another's success; to envy",
+                "ex" : "Craig, the younger brother, secretly begrudged Brian's fortune.",
                 "ant" : ["forgive"],
                 "syn" : ["resent"]
             },
             "mandarin" : {
                 "ps" : "noun",
-                "def" : "a influencial person; member of an elite group",
-                "ex" : "mandarins and bureaucrafts discussed the state of the economy durring the summit",
+                "def" : "an influential person; a member of an elite group",
+                "ex" : "Mandarins and bureaucrats discussed the state of the economy during the summit.",
                 "ant" : [],
                 "syn" : []
             },
             "glutinous" : {
                 "ps" : "adjective",
                 "def" : "gluey;stickey",
-                "ex" : "the bread dough was in a glutinous mass that stuck to anything it touched",
+                "ex" : "The bread dough was in a glutinous mass that stuck to anything it touched.",
                 "ant" : [],
                 "syn" : []
             },
             "enmity" : {
                 "ps" : "noun",
                 "def" : "deep-seated hostility, often mutual",
-                "ex" : "angry states revealed the mutual enmity between steve and his supervisor",
+                "ex" : "Angry stares revealed the mutual enmity between Steve and his supervisor.",
                 "ant" : ["freindship"],
                 "syn" : ["hatred","antgonism"]
             },
             "declaim" : {
                 "ps" : "verb",
                 "def" : "to speak in a dramatic, impassioned or blustering manner",
-                "ex" : "at the debate, each politician declaimed againt the policies of the others",
+                "ex" : "At the debate, each politician declaimed against the policies of the others.",
                 "ant" : ["whisper"],
                 "syn" : ["trumpet",]
             },
             "imbue" : {
                 "ps" : "verb",
                 "def" : "to inspire or influence; to saturate",
-                "ex" : "her hard-working mother imbued jane with a solid work ethic",
+                "ex" : "Her hard-working mother imbued Jane with a solid work ethic.",
                 "ant" : [],
                 "syn" : ["instill","pervade"]
             },
             "gaff" : {
                 "ps" : "noun",
                 "def" : "a pole with a large hook on one end",
-                "ex" : "The fisherman used a gaff to grad the heavy swordfish onto the boat",
+                "ex" : "The fisherman used a gaff to drag the heavy swordfish onto the boat.",
                 "ant" : [],
                 "syn" : []
             },
             "quaff" : {
                 "ps" : "verb",
                 "def" : "to drink in large quantities; to gulp",
-                "ex" : "the old captain quaffed his ale and then orderd another stein",
+                "ex" : "The old captain quaffed his ale and then ordered another stein.",
                 "ant" : ["sip"],
                 "syn" : ["guzzle","swig"]
             },
             "bibliophile" : {
                 "ps" : "noun",
                 "def" : "a lover of books",
-                "ex" : "the bibliophile was thrilled to get a job at the library",
+                "ex" : "The bibliophile was thrilled to get a job at the library.",
                 "ant" : [],
                 "syn" : []
             },
