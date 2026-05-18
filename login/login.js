@@ -1,4 +1,4 @@
-var API = "/api";
+// API variable is defined in shared/api.js
 
 function login_onload() {
     // If already logged in, redirect appropriately

@@ -1,5 +1,5 @@
 // mergedata.js — fetches lesson data from the API and merges into lesson_data
-var API = "/api";
+// API variable is defined in shared/api.js
 
 function mergeLocalData(callback) {
     fetch(API + "/lessons")

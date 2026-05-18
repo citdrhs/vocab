@@ -1,9 +1,8 @@
 var allResults = [];
 var sortKey = "date";
 var sortAsc = false;
-var API = "/api";
 
-//  Onload 
+// ── Onload ──
 function admin_onload() {
     if (sessionStorage.getItem("logged_in") !== "true" || sessionStorage.getItem("role") !== "admin") {
         window.location.href = "../login/login.html";
@@ -19,7 +18,7 @@ function adminLogout() {
     window.location.href = "../login/login.html";
 }
 
-//  Tabs 
+// ── Tabs ──
 function showTab(tabName) {
     document.querySelectorAll(".tab-content").forEach(function(el) { el.style.display = "none"; });
     document.querySelectorAll(".tab-btn").forEach(function(btn) { btn.classList.remove("active"); });
@@ -36,7 +35,7 @@ function showSubTab(name) {
     if (name === "manage") { renderManageLessons(); }
 }
 
-//  Add / Edit Word 
+// ── Add / Edit Word ──
 function saveWord() {
     var lessonNum = document.getElementById("aw-lesson").value.trim();
     var word      = document.getElementById("aw-word").value.trim().toLowerCase();
@@ -107,7 +106,7 @@ function loadWordForEdit() {
     .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
-//  Add / Edit RPS 
+// ── Add / Edit RPS ──
 function saveRPS() {
     var lessonNum = document.getElementById("rps-lesson").value.trim();
     var type_     = document.getElementById("rps-type").value;
@@ -137,7 +136,7 @@ function saveRPS() {
     .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
-//  Delete 
+// ── Delete ──
 function populateDeleteOptions() {
     var lessonNum = document.getElementById("del-lesson").value.trim();
     var type_     = document.getElementById("del-type").value;
@@ -224,7 +223,7 @@ function deleteEntry() {
     .catch(function() { errorEl.textContent = "Could not connect to server."; });
 }
 
-//  Manage Lessons 
+// ── Manage Lessons ──
 function renderManageLessons() {
     var container = document.getElementById("manage-lessons-list");
     if (!container) return;
@@ -293,7 +292,7 @@ function deleteLesson(lessonNum) {
     .catch(function() { alert("Could not connect to server."); });
 }
 
-//  Results 
+// ── Results ──
 function loadResults() {
     fetch(API + "/results")
     .then(function(r) { return r.json(); })

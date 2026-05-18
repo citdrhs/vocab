@@ -2,8 +2,7 @@ var current_lessons = []
 
 var wordcontainer = document.getElementById("word-container");
 var rpscontainer  = document.getElementById("rps-container");
-
-var API = "/api";
+// API variable is defined in shared/api.js
 
 // ── Merge API lesson data into lesson_data ──
 function mergeLocalData(callback) {

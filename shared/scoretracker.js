@@ -1,5 +1,5 @@
 // scoretracker.js — saves quiz results to the server API
-var SCORE_API = "/api";
+// API variable is defined in shared/api.js
 
 function saveScore(testType, lessons, score, total) {
     var studentName = sessionStorage.getItem("student_name") || "Unknown";
@@ -15,7 +15,7 @@ function saveScore(testType, lessons, score, total) {
         date:     new Date().toLocaleString()
     };
 
-    fetch(SCORE_API + "/results/save", {
+    fetch(API + "/results/save", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(result)
