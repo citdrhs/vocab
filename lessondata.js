@@ -89,64 +89,64 @@ var lesson_data = { //all of the data for each of the lessons
                 "ps" : "adjective",
                 "def" : "Mentally ill; insane",
                 "ex" : "Mary's demented cat attacks anything that makes a noise, including the television.",
-                "ant" : ["deranged", "insane", ],
-                "syn" : [""]
+                "ant" : ["sane"],
+                "syn" : ["deranged","insane"]
             },
             "hone" : {
                 "ps" : "adjective",
-                "def" : "weird; mysterious; strange and frightening",
-                "ex" : "No one accepted the dare to stay in the ____ old mansion for one night.",
-                "ant" : ["common", "ordinary"],
-                "syn" : ["creepy", "sinister"]
-            },
-            "martial" : {
-                "ps" : "adjective",
-                "def" : "warlike; relating to the military",
-                "ex" : "A state of ____ law was declared in the small country in the weeks following the overthrow of the government.",
-                "ant" : [],
+                "def" : "to sharpen",
+                "ex" : "The butcher used a whetstone to hone his knives until they were razor sharp",
+                "ant" : ["dull"],
                 "syn" : []
             },
-            "anthropomorphic" : {
-                "ps" : "adjective",
-                "def" : "attributing human characteristics or qualities to objects, animals, or gods",
-                "ex" : "____ stories might feature pigs and rabbits walking upright wearing clothes, and speaking to each other in human languages.",
-                "ant" : [],
-                "syn" : []
-            },
-            "beneficiary" : {
-                "ps" : "noun",
-                "def" : "one who receives benefits",
-                "ex" : "John was the sole ____ of his Uncle Martin’s vast estate.",
-                "ant" : [],
-                "syn" : ["recipient", "heir"]
-            },
-            "careen" : {
+            "beleaguer" : {
                 "ps" : "verb",
-                "def" : "to swerve or lurch from side to side while in motion",
-                "ex" : "The torrential winds caused the ship to ____ violently.",
+                "def" : "to besiege by encircling (as with an army); to harass",
+                "ex" : "he mosquitoes will beleaguer you if you venture near the swamp.",
+                "ant" : ["evade"],
+                "syn" : ["surround","annoy"]
+            },
+            "gorge" : {
+                "ps" : "verb",
+                "def" : "to eat or swallow greedily",
+                "ex" : "The beagle gorged itself after it chewed through the bag of dog food.",
                 "ant" : [],
-                "syn" : ["tilt"]
+                "syn" : []
             },
-            "aplomb" : {
-                "ps" : "noun",
-                "def" : "self-confidence",
-                "ex" : "The ____ of the young dancer astonished the veterans of the troupe.",
-                "ant" : ["awkwardness"],
-                "syn" : ["assurance", "poise"]
+            "antiquated" : {
+                "ps" : "adjective",
+                "def" : "no longer used or useful; very old",
+                "ex" : "The antiquated washboard hung on the wall, useful only as a decoration.",
+                "ant" : ["modern"],
+                "syn" : ["obsolete","out-of-date","archaic"]
             },
-            "guile" : {
+            "opiate" : {
                 "ps" : "noun",
-                "def" : "slyness and cunning in dealing with others",
-                "ex" : "Brad’s ____ contributed to his wealth, but it also created enemies.",
-                "ant" : ["honesty"],
-                "syn" : ["craftiness", "astuteness"]
+                "def" : "a narcotic used to cause sleep or bring relief from pain",
+                "ex" : "The veterinarian used an opiate to sedate the wounded animal.",
+                "ant" : ["stimulant"],
+                "syn" : []
             },
-            "modicum" : {
+            "caricature" : {
                 "ps" : "noun",
-                "def" : "a small amount",
-                "ex" : "A sudden shower gave us a ____ of relief from the heat and humidity.",
-                "ant" : ["abundance"],
-                "syn" : ["bit"]
+                "def" : "an exaggerated portrayal of one's features",
+                "ex" : "The caricature of the mayor in the political cartoon exaggerated the size of his ears and nose.",
+                "ant" : [],
+                "syn" : ["mockery", "cartoon"]
+            },
+            "dally" : {
+                "ps" : "verb",
+                "def" : "to waste time; to dawdle",
+                "ex" : "If you dally too long in making a decision, someone else will buy the car you want.",
+                "ant" : ["hasten","hurry"],
+                "syn" : ["dawdle", "loiter"]
+            },
+            "felonious" : {
+                "ps" : "adjective",
+                "def" : " pertaining to or constituting a major crime",
+                "ex" : "The inmate expected to be released from prison early, despite the many felonious activities on his record.",
+                "ant" : [],
+                "syn" : ["criminal"]
             },
             "rancid" : {
                 "ps" : "adjective",
