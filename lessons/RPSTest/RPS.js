@@ -60,9 +60,12 @@ function buildQuestions() {
         var term    = rpsEntries[i][0];
         var meaning = rpsEntries[i][1];
 
-        var wrongChoices = rpsEntries.filter(e => e[0] !== term).map(e => e[1]);
+        var wrongChoices = rpsEntries
+         .filter(e => e[0] !== term && e[1] !== meaning)  // exclude same key AND same meaning
+         .map(e => e[1]);
         wrongChoices = [...new Set(wrongChoices)];
         wrongChoices = shuffle(wrongChoices).slice(0, 3);
+        
 
         if (wrongChoices.length < 1) continue;
 
