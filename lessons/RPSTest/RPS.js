@@ -55,13 +55,13 @@ function buildQuestions() {
         ...Object.entries(current_lesson_rps_data.suffixes)
     ];
 
-    // TYPE 1: What does [term] mean?
+    
     for (var i = 0; i < rpsEntries.length; i++) {
         var term    = rpsEntries[i][0];
         var meaning = rpsEntries[i][1];
 
         var wrongChoices = rpsEntries
-         .filter(e => e[0] !== term && e[1] !== meaning)  // exclude same key AND same meaning
+         .filter(e => e[0] !== term && e[1] !== meaning) 
          .map(e => e[1]);
         wrongChoices = [...new Set(wrongChoices)];
         wrongChoices = shuffle(wrongChoices).slice(0, 3);
@@ -78,7 +78,7 @@ function buildQuestions() {
         });
     }
 
-    // TYPE 2: Sentence fill-in-the-blank
+    
     for (var sentence in current_lesson_rps_data.sentences) {
         var answer   = current_lesson_rps_data.sentences[sentence];
         var allTerms = rpsEntries.map(e => e[0]);
@@ -94,7 +94,7 @@ function buildQuestions() {
         });
     }
 
-    // TYPE 2b: Word identification
+    
     for (var word in current_lesson_rps_data.words) {
         var wordAnswer = current_lesson_rps_data.words[word];
         var allTerms2  = rpsEntries.map(e => e[0]);
